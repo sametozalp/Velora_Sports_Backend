@@ -46,10 +46,12 @@ public class User {
 
     @Column(name = "user_status", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserStatus userStatus = UserStatus.ACTIVE;
+    private UserStatus userStatus;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> roles;
 
-
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
 }
