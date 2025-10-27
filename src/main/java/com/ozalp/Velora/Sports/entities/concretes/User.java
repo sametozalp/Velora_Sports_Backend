@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.entities.concretes;
 
+import com.ozalp.Velora.Sports.entities.abstracts.BaseEntity;
 import com.ozalp.Velora.Sports.entities.enums.Gender;
 import com.ozalp.Velora.Sports.entities.enums.UserStatus;
 import jakarta.persistence.*;
@@ -17,7 +18,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User {
+public class User extends BaseEntity {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -28,7 +29,7 @@ public class User {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    @Column(name = "email", nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
     @Column(name = "phone", unique = true)

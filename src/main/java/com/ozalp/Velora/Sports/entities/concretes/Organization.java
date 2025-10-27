@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.entities.concretes;
 
+import com.ozalp.Velora.Sports.entities.abstracts.BaseEntity;
 import com.ozalp.Velora.Sports.entities.enums.OrganizationStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Organization {
+public class Organization extends BaseEntity {
 
     @Column(name = "name", nullable = false)
     private String name;

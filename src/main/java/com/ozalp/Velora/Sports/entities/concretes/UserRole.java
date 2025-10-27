@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.entities.concretes;
 
+import com.ozalp.Velora.Sports.entities.abstracts.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,7 +9,7 @@ import lombok.Setter;
 @Table(name = "user_roles")
 @Getter
 @Setter
-public class UserRole {
+public class UserRole extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "user_id")
