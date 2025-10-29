@@ -5,24 +5,24 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
-public class UserRegisterRequest {
+public class CreateMembershipRequest {
 
     @NotBlank
     @NotNull
-    private String firstName;
+    private String organizationId;
 
     @NotBlank
     @NotNull
-    private String lastName;
+    private String userId;
 
-    @NotBlank
     @NotNull
-    private String email;
+    private LocalDateTime joined_at;
 
-    @NotBlank
     @NotNull
-    private String password;
+    private LocalDateTime left_at;
 
 }

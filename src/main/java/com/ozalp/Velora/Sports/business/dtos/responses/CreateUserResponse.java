@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class UserRegisterResponse {
+public class CreateUserResponse {
 
     private UUID id;
 
