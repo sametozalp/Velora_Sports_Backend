@@ -5,6 +5,7 @@ import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.entities.concretes.User;
+import com.ozalp.Velora.Sports.entities.enums.UserStatus;
 import com.ozalp.Velora.Sports.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,7 +24,9 @@ public class UserManager implements UserService {
 
     @Override
     public CreateUserResponse create(CreateUserRequest request) {
-        return null;
+        User user = mapper.toEntity(request);
+        user.setUserStatus(UserStatus.ACTIVE);
+        return mapper.toResponse(repository.save(user));
     }
 
 }
