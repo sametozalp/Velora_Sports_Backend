@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.abstracts.UserService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
