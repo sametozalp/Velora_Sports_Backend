@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Table(name = "exercises")
 @AllArgsConstructor
@@ -27,8 +29,9 @@ public class Exercise extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private Category category;
 
+    @Column(name = "muscle_group")
     @Enumerated(EnumType.STRING)
-    private MuscleGroup muscleGroup;
+    private List<MuscleGroup> muscleGroup;
 
 
 }
