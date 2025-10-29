@@ -5,6 +5,7 @@ import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.entities.concretes.User;
+import com.ozalp.Velora.Sports.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,11 @@ import org.springframework.stereotype.Service;
 public class UserManager implements UserService {
 
     private final UserMapper mapper;
+    private final UserRepository repository;
 
     @Override
     public User create(User user) {
-        return null;
+        return repository.save(user);
     }
 
     @Override
