@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CreateWorkoutProgramRequest {
+public class CreateWorkoutProgramRequest extends BaseRequest {
 
     private String coachId;
 

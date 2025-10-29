@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateRoleResponse {
+public class CreateRoleResponse extends BaseResponse {
 
     private UUID id;
 

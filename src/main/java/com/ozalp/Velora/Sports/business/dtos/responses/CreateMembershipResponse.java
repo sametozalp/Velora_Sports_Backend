@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateMembershipResponse {
+public class CreateMembershipResponse extends BaseResponse {
 
     private UUID id;
 

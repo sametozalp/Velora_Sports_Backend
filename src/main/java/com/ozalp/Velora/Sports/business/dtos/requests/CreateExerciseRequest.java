@@ -11,7 +11,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class CreateExerciseRequest {
+public class CreateExerciseRequest extends BaseRequest {
 
     @NotBlank
     @NotNull

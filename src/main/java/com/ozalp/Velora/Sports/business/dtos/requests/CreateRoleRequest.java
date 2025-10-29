@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateRoleRequest {
+public class CreateRoleRequest extends BaseRequest {
 
     @NotNull
     private RoleEnum name;

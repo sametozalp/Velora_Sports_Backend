@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateUserRequest {
+public class CreateUserRequest extends BaseRequest {
 
     @NotBlank
     @NotNull

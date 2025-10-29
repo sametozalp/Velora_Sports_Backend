@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateOrganizationResponse {
+public class CreateOrganizationResponse extends BaseResponse {
 
     private UUID id;
 

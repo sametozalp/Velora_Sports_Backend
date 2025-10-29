@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateUserResponse {
+public class CreateUserResponse extends BaseResponse {
 
     private UUID id;
 

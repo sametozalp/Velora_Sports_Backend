@@ -3,7 +3,7 @@ package com.ozalp.Velora.Sports.business.dtos.requests;
 import com.ozalp.Velora.Sports.entities.concretes.Exercise;
 import jakarta.validation.constraints.NotNull;
 
-public class CreateWorkoutItemRequest {
+public class CreateWorkoutItemRequest extends BaseRequest {
 
     @NotNull
     private String workoutProgramId;

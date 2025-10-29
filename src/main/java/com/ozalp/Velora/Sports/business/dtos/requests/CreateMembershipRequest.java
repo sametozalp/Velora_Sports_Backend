@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class CreateMembershipRequest {
+public class CreateMembershipRequest extends BaseRequest {
 
     @NotBlank
     @NotNull

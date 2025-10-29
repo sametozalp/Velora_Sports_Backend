@@ -2,7 +2,7 @@ package com.ozalp.Velora.Sports.business.dtos.responses;
 
 import java.util.UUID;
 
-public class CreateWorkoutItemResponse {
+public class CreateWorkoutItemResponse extends BaseResponse {
 
     private UUID id;
 
