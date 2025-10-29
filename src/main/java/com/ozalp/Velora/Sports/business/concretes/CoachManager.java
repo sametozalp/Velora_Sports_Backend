@@ -38,7 +38,7 @@ public class CoachManager implements CoachService {
         User user = userService.findById(id);
         Coach coach = repository.save(new Coach(user));
         CoachResponse response = new CoachResponse();
-        response.setUserResponse(userMapper.toResponse(coach.getUser()));
+        response.setUser(userMapper.toResponse(coach.getUser()));
         return response;
     }
 }

@@ -55,4 +55,10 @@ public class User extends BaseEntity {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "organization_id")
     private Organization organization;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Athlete athlete;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
+    private Coach coach;
 }

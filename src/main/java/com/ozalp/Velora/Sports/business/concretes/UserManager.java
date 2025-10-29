@@ -1,11 +1,11 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
-import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.abstracts.UserService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.common.Messages;
+import com.ozalp.Velora.Sports.entities.concretes.Athlete;
 import com.ozalp.Velora.Sports.entities.concretes.User;
 import com.ozalp.Velora.Sports.entities.enums.UserStatus;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
@@ -37,6 +37,9 @@ public class UserManager implements UserService {
     public CreateUserResponse create(CreateUserRequest request) {
         User user = mapper.toEntity(request);
         user.setUserStatus(UserStatus.ACTIVE);
+        Athlete athlete = new Athlete();
+        athlete.setUser(user);
+        user.setAthlete(athlete);
         return mapper.toResponse(repository.save(user));
     }
 
