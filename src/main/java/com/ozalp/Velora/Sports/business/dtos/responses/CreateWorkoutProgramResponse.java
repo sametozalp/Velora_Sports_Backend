@@ -12,10 +12,6 @@ public class CreateWorkoutProgramResponse extends BaseResponse {
 
     private UUID id;
 
-    private String coachId;
-
-    private String athleteId;
-
     private String title;
 
     private String description;

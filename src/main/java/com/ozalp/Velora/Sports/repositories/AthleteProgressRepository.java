@@ -1,0 +1,11 @@
+package com.ozalp.Velora.Sports.repositories;
+
+import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
+
+@Repository
+public interface AthleteProgressRepository extends JpaRepository<AthleteProgress, UUID> {
+}

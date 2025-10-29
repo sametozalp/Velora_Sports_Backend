@@ -35,4 +35,7 @@ public class WorkoutItem extends BaseEntity {
     @Column(name = "rest_seconds", nullable = false)
     private int restSeconds;
 
+    @Column(name = "point", nullable = false)
+    private int point;
+
 }

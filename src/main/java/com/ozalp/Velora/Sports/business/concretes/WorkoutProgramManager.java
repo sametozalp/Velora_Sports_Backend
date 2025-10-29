@@ -1,6 +1,7 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
+import com.ozalp.Velora.Sports.business.abstracts.CoachService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutProgramService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutProgramRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateWorkoutProgramResponse;
@@ -21,6 +22,7 @@ public class WorkoutProgramManager implements WorkoutProgramService {
     private final WorkoutProgramRepository repository;
     private final WorkoutProgramMapper mapper;
     private final AthleteService athleteService;
+    private final CoachService coachService;
 
     @Override
     public WorkoutProgram create(WorkoutProgram workoutProgram) {
@@ -36,6 +38,7 @@ public class WorkoutProgramManager implements WorkoutProgramService {
     @Override
     public CreateWorkoutProgramResponse create(CreateWorkoutProgramRequest request) {
         WorkoutProgram workoutProgram = mapper.toEntity(request);
+        workoutProgram.setCoach(coachService.findById(request.getCoachId()));
         workoutProgram.setAthlete(athleteService.findById(request.getAthleteId()));
         return mapper.toResponse(repository.save(workoutProgram));
     }
