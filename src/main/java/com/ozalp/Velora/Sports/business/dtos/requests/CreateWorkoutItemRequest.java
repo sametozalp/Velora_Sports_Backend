@@ -1,15 +1,20 @@
 package com.ozalp.Velora.Sports.business.dtos.requests;
 
-import com.ozalp.Velora.Sports.entities.concretes.Exercise;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.UUID;
+
+@Getter
+@Setter
 public class CreateWorkoutItemRequest extends BaseRequest {
 
     @NotNull
-    private String workoutProgramId;
+    private UUID workoutProgramId;
 
     @NotNull
-    private Exercise exercise;
+    private UUID exerciseId;
 
     private String notes;
 

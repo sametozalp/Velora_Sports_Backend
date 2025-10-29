@@ -4,14 +4,15 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 @Getter
 @Setter
 public class CreateWorkoutProgramRequest extends BaseRequest {
 
-    private String coachId;
+    private UUID coachId;
 
-    private String athleteId;
+    private UUID athleteId;
 
     private String title;
 

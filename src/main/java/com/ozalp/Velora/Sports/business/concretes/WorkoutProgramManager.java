@@ -1,6 +1,10 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutProgramService;
+import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutProgramRequest;
+import com.ozalp.Velora.Sports.business.dtos.responses.CreateWorkoutProgramResponse;
+import com.ozalp.Velora.Sports.business.mappers.WorkoutProgramMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.WorkoutProgram;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
@@ -15,6 +19,8 @@ import java.util.UUID;
 public class WorkoutProgramManager implements WorkoutProgramService {
 
     private final WorkoutProgramRepository repository;
+    private final WorkoutProgramMapper mapper;
+    private final AthleteService athleteService;
 
     @Override
     public WorkoutProgram create(WorkoutProgram workoutProgram) {
@@ -25,5 +31,12 @@ public class WorkoutProgramManager implements WorkoutProgramService {
     public WorkoutProgram findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Messages.WorkoutProgramMessages.NOT_FOUND));
+    }
+
+    @Override
+    public CreateWorkoutProgramResponse create(CreateWorkoutProgramRequest request) {
+        WorkoutProgram workoutProgram = mapper.toEntity(request);
+        workoutProgram.setAthlete(athleteService.findById(request.getAthleteId()));
+        return mapper.toResponse(repository.save(workoutProgram));
     }
 }

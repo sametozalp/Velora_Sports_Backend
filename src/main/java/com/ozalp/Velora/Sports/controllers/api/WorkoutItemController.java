@@ -1,6 +1,12 @@
 package com.ozalp.Velora.Sports.controllers.api;
 
+import com.ozalp.Velora.Sports.business.abstracts.WorkoutItemService;
+import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutItemRequest;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -8,4 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/workoutItem")
 @AllArgsConstructor
 public class WorkoutItemController {
+
+    private final WorkoutItemService workoutItemService;
+
+    @PostMapping("/create")
+    ResponseEntity<?> create(@Valid @RequestBody CreateWorkoutItemRequest request) {
+        return ResponseEntity.ok(workoutItemService.create(request));
+    }
 }
