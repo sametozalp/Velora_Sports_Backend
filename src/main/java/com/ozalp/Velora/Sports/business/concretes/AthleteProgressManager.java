@@ -16,6 +16,7 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -65,5 +66,13 @@ public class AthleteProgressManager implements AthleteProgressService {
 
         athleteProgress.setAthleteProgressStatus(athleteProgressStatus);
         return mapper.toResponse(save(athleteProgress));
+    }
+
+    @Override
+    public List<CreateAthleteProgressResponse> findByAthleteId(UUID athleteId) {
+        return repository.findByAthleteId(athleteId)
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
     }
 }

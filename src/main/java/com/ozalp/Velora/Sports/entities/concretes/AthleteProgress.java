@@ -39,7 +39,7 @@ public class AthleteProgress extends BaseEntity {
     private LocalDateTime completedAt;
 
     @Column(name = "points_earned", nullable = false)
-    private Integer pointsEarned = 0;
+    private Integer pointsEarned;
 
     public AthleteProgress(Athlete athlete, PointType pointType, UUID targetItemId, AthleteProgressStatus athleteProgressStatus, Integer pointsEarned) {
         this.athlete = athlete;
