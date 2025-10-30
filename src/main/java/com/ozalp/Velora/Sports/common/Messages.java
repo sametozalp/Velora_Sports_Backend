@@ -2,6 +2,11 @@ package com.ozalp.Velora.Sports.common;
 
 public class Messages {
 
+    public static class AthleteProgress {
+        public static String NOT_FOUND = "Athlete progress not found";
+
+    }
+
     public static class AdminMessages {
         public static String NOT_FOUND = "Admin not found";
     }

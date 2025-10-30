@@ -10,7 +10,7 @@ import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Membership;
 import com.ozalp.Velora.Sports.entities.enums.MembershipStatus;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.repositories.MembershipRepository;
+import com.ozalp.Velora.Sports.dataAcess.MembershipRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

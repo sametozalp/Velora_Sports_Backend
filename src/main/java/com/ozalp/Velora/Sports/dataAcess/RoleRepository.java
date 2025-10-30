@@ -1,4 +1,4 @@
-package com.ozalp.Velora.Sports.repositories;
+package com.ozalp.Velora.Sports.dataAcess;
 
 import com.ozalp.Velora.Sports.entities.concretes.Role;
 import org.springframework.data.jpa.repository.JpaRepository;

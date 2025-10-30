@@ -8,7 +8,7 @@ import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Role;
 import com.ozalp.Velora.Sports.entities.enums.RoleEnum;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.repositories.RoleRepository;
+import com.ozalp.Velora.Sports.dataAcess.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

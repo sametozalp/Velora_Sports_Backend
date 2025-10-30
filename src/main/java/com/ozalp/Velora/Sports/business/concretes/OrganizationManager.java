@@ -7,7 +7,7 @@ import com.ozalp.Velora.Sports.business.mappers.OrganizationMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Organization;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.repositories.OrganizationRepository;
+import com.ozalp.Velora.Sports.dataAcess.OrganizationRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -8,7 +8,7 @@ import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Coach;
 import com.ozalp.Velora.Sports.entities.concretes.User;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.repositories.CoachRepository;
+import com.ozalp.Velora.Sports.dataAcess.CoachRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
