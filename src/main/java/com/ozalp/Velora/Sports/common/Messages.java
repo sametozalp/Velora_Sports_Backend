@@ -3,6 +3,7 @@ package com.ozalp.Velora.Sports.common;
 public class Messages {
 
     public static class AthleteProgress {
+        public static final String NOT_MATCHED = "User and athlete progress not matched";
         public static String NOT_FOUND = "Athlete progress not found";
 
     }

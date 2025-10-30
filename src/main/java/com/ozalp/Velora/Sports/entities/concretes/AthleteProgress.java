@@ -32,6 +32,7 @@ public class AthleteProgress extends BaseEntity {
     private UUID targetItemId;
 
     @Column(name = "athlete_progress_status", nullable = false)
+    @Enumerated(EnumType.STRING)
     private AthleteProgressStatus athleteProgressStatus;
 
     @Column(name = "completed_at", nullable = true)
