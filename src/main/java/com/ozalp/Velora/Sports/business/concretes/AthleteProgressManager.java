@@ -28,4 +28,9 @@ public class AthleteProgressManager implements AthleteProgressService {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Messages.AthleteProgress.NOT_FOUND));
     }
+
+    @Override
+    public AthleteProgress save(AthleteProgress athleteProgress) {
+        return repository.save(athleteProgress);
+    }
 }

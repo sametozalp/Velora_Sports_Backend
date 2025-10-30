@@ -9,4 +9,6 @@ public interface BaseService<T extends BaseEntity> {
     T create(T t);
 
     T findById(UUID id);
+
+    T save(T t);
 }

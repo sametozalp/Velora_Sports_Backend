@@ -34,6 +34,11 @@ public class CoachManager implements CoachService {
     }
 
     @Override
+    public Coach save(Coach coach) {
+        return repository.save(coach);
+    }
+
+    @Override
     public CoachResponse setCoach(UUID id) {
         User user = userService.findById(id);
         Coach coach = repository.save(new Coach(user));

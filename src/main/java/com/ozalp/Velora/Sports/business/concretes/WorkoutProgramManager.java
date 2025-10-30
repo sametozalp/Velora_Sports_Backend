@@ -7,9 +7,9 @@ import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutProgramReques
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateWorkoutProgramResponse;
 import com.ozalp.Velora.Sports.business.mappers.WorkoutProgramMapper;
 import com.ozalp.Velora.Sports.common.Messages;
+import com.ozalp.Velora.Sports.dataAcess.WorkoutProgramRepository;
 import com.ozalp.Velora.Sports.entities.concretes.WorkoutProgram;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.dataAcess.WorkoutProgramRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +33,11 @@ public class WorkoutProgramManager implements WorkoutProgramService {
     public WorkoutProgram findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Messages.WorkoutProgramMessages.NOT_FOUND));
+    }
+
+    @Override
+    public WorkoutProgram save(WorkoutProgram workoutProgram) {
+        return repository.save(workoutProgram);
     }
 
     @Override

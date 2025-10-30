@@ -26,4 +26,9 @@ public class AdminManager implements AdminService {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Messages.AdminMessages.NOT_FOUND));
     }
+
+    @Override
+    public Admin save(Admin admin) {
+        return repository.save(admin);
+    }
 }

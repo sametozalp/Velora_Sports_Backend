@@ -34,6 +34,11 @@ public class UserManager implements UserService {
     }
 
     @Override
+    public User save(User user) {
+        return repository.save(user);
+    }
+
+    @Override
     public CreateUserResponse create(CreateUserRequest request) {
         User user = mapper.toEntity(request);
         user.setUserStatus(UserStatus.ACTIVE);

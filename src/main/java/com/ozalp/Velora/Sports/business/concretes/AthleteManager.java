@@ -31,6 +31,11 @@ public class AthleteManager implements AthleteService {
     }
 
     @Override
+    public Athlete save(Athlete athlete) {
+        return repository.save(athlete);
+    }
+
+    @Override
     public Athlete setAthlete(UUID id) {
         User user = userService.findById(id);
         Athlete athlete = new Athlete();

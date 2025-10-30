@@ -26,4 +26,9 @@ public class UserRoleManager implements UserRoleService {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Messages.UserRoleMessages.NOT_FOUND));
     }
+
+    @Override
+    public UserRole save(UserRole userRole) {
+        return repository.save(userRole);
+    }
 }

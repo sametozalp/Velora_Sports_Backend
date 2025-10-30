@@ -32,6 +32,11 @@ public class OrganizationManager implements OrganizationService {
     }
 
     @Override
+    public Organization save(Organization organization) {
+        return repository.save(organization);
+    }
+
+    @Override
     public CreateOrganizationResponse create(CreateOrganizationRequest request) {
         Organization organization = mapper.toEntity(request);
         return mapper.toResponse(repository.save(organization));

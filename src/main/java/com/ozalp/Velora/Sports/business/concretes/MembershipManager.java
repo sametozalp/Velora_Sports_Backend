@@ -37,6 +37,11 @@ public class MembershipManager implements MembershipService {
     }
 
     @Override
+    public Membership save(Membership membership) {
+        return repository.save(membership);
+    }
+
+    @Override
     public CreateMembershipResponse create(CreateMembershipRequest request) {
         Membership membership = mapper.toEntity(request);
         membership.setMembershipStatus(MembershipStatus.ACTIVE);

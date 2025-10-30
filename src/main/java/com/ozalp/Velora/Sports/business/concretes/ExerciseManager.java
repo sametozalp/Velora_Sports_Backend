@@ -32,6 +32,11 @@ public class ExerciseManager implements ExerciseService {
     }
 
     @Override
+    public Exercise save(Exercise exercise) {
+        return repository.save(exercise);
+    }
+
+    @Override
     public CreateExerciseResponse create(CreateExerciseRequest request) {
         Exercise exercise = mapper.toEntity(request);
         return mapper.toResponse(repository.save(exercise));

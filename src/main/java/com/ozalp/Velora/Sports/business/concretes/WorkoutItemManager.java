@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.ExerciseService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutItemService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutProgramService;
@@ -23,6 +24,7 @@ public class WorkoutItemManager implements WorkoutItemService {
     private final WorkoutItemMapper mapper;
     private final ExerciseService exerciseService;
     private final WorkoutProgramService workoutProgramService;
+    private final AthleteProgressService athleteProgressService;
 
     @Override
     public WorkoutItem create(WorkoutItem workoutItem) {
@@ -33,6 +35,11 @@ public class WorkoutItemManager implements WorkoutItemService {
     public WorkoutItem findById(UUID id) {
         return repository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(Messages.WorkoutItemMessages.NOT_FOUND));
+    }
+
+    @Override
+    public WorkoutItem save(WorkoutItem workoutItem) {
+        return repository.save(workoutItem);
     }
 
     @Override

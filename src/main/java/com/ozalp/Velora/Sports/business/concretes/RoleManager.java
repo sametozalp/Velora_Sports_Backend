@@ -33,6 +33,11 @@ public class RoleManager implements RoleService {
     }
 
     @Override
+    public Role save(Role role) {
+        return repository.save(role);
+    }
+
+    @Override
     public CreateRoleResponse create(CreateRoleRequest request) {
         return mapper.toResponse(mapper.toEntity(request));
     }
