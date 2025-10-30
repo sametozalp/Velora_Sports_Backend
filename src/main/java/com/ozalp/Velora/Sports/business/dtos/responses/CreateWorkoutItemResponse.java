@@ -11,8 +11,6 @@ public class CreateWorkoutItemResponse extends BaseResponse {
 
     private UUID id;
 
-    private String workoutProgramId;
-
     private String notes;
 
     private int sets;

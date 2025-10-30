@@ -8,9 +8,10 @@ import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutItemRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateWorkoutItemResponse;
 import com.ozalp.Velora.Sports.business.mappers.WorkoutItemMapper;
 import com.ozalp.Velora.Sports.common.Messages;
+import com.ozalp.Velora.Sports.dataAcess.WorkoutItemRepository;
 import com.ozalp.Velora.Sports.entities.concretes.WorkoutItem;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.dataAcess.WorkoutItemRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -42,11 +43,14 @@ public class WorkoutItemManager implements WorkoutItemService {
         return repository.save(workoutItem);
     }
 
+    @Transactional
     @Override
     public CreateWorkoutItemResponse create(CreateWorkoutItemRequest request) {
         WorkoutItem workoutItem = mapper.toEntity(request);
         workoutItem.setExercise(exerciseService.findById(request.getExerciseId()));
         workoutItem.setWorkoutProgram(workoutProgramService.findById(request.getWorkoutProgramId()));
-        return mapper.toResponse(repository.save(workoutItem));
+        WorkoutItem saved = repository.save(workoutItem);
+        athleteProgressService.save(saved);
+        return mapper.toResponse(saved);
     }
 }

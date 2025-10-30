@@ -34,9 +34,17 @@ public class AthleteProgress extends BaseEntity {
     @Column(name = "athlete_progress_status", nullable = false)
     private AthleteProgressStatus athleteProgressStatus;
 
-    @Column(name = "completed_at", nullable = false)
+    @Column(name = "completed_at", nullable = true)
     private LocalDateTime completedAt;
 
     @Column(name = "points_earned", nullable = false)
     private Integer pointsEarned = 0;
+
+    public AthleteProgress(Athlete athlete, PointType pointType, UUID targetItemId, AthleteProgressStatus athleteProgressStatus, Integer pointsEarned) {
+        this.athlete = athlete;
+        this.pointType = pointType;
+        this.targetItemId = targetItemId;
+        this.athleteProgressStatus = athleteProgressStatus;
+        this.pointsEarned = pointsEarned;
+    }
 }
