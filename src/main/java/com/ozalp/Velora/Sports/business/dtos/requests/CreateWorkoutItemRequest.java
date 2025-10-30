@@ -4,6 +4,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.UUID;
 
 @Getter
@@ -12,6 +13,9 @@ public class CreateWorkoutItemRequest extends BaseRequest {
 
     @NotNull
     private UUID workoutProgramId;
+
+    @NotNull
+    private UUID athleteId;
 
     @NotNull
     private UUID exerciseId;
@@ -26,5 +30,8 @@ public class CreateWorkoutItemRequest extends BaseRequest {
 
     @NotNull
     private int restSeconds;
+
+    @NotNull
+    private LocalDate date;
 
 }

@@ -15,6 +15,8 @@ import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -49,8 +51,17 @@ public class WorkoutItemManager implements WorkoutItemService {
         WorkoutItem workoutItem = mapper.toEntity(request);
         workoutItem.setExercise(exerciseService.findById(request.getExerciseId()));
         workoutItem.setWorkoutProgram(workoutProgramService.findById(request.getWorkoutProgramId()));
+        workoutItem.setAthlete(workoutProgramService.findById(request.getWorkoutProgramId()).getAthlete());
         WorkoutItem saved = repository.save(workoutItem);
         athleteProgressService.save(saved);
         return mapper.toResponse(saved);
+    }
+
+    @Override
+    public List<CreateWorkoutItemResponse> findByAllInToday(UUID athleteId, LocalDate date) {
+        return repository.findByAthleteIdAndDate(athleteId, date)
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
     }
 }

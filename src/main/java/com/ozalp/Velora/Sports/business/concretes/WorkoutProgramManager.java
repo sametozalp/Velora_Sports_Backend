@@ -13,7 +13,6 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -49,10 +48,11 @@ public class WorkoutProgramManager implements WorkoutProgramService {
         return mapper.toResponse(repository.save(workoutProgram));
     }
 
-    @Override
-    public List<CreateWorkoutProgramResponse> findByAthleteId(UUID athleteId) {
-        return repository.findByAthleteId(athleteId)
-                .stream()
-                .map(mapper::toResponse).toList();
-    }
+    // bugün hangi programlari içerisinde sorgusu
+//    @Override
+//    public List<CreateWorkoutProgramResponse> findByAthleteId(UUID athleteId) {
+//        return repository.findByAthleteIdAndStartDateLessThanEqualAndEndDateGreaterThanEqual(athleteId, LocalDateTime.now(), LocalDateTime.now())
+//                .stream()
+//                .map(mapper::toResponse).toList();
+//    }
 }

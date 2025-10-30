@@ -11,7 +11,7 @@ public class HomeFeedResponse {
 
     private CreateUserResponse user;
 
-    private List<CreateWorkoutProgramResponse> workoutPrograms;
+    private List<CreateWorkoutItemResponse> workoutItems;
 
     private List<CreateAthleteProgressResponse> athleteProgresses;
 

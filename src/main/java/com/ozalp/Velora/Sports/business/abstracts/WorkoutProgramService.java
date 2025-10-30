@@ -11,5 +11,5 @@ public interface WorkoutProgramService extends BaseService<WorkoutProgram> {
 
     CreateWorkoutProgramResponse create(CreateWorkoutProgramRequest request);
 
-    List<CreateWorkoutProgramResponse> findByAthleteId(UUID athleteId);
+//    List<CreateWorkoutProgramResponse> findByAthleteId(UUID athleteId);
 }

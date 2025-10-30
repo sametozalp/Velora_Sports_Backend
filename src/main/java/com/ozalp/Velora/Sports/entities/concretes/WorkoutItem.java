@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "workout_items")
 @AllArgsConstructor
@@ -20,11 +22,18 @@ public class WorkoutItem extends BaseEntity {
     private WorkoutProgram workoutProgram;
 
     @ManyToOne
+    @JoinColumn(name = "athlete_id", nullable = false)
+    private Athlete athlete;
+
+    @ManyToOne
     @JoinColumn(name = "exercise_id", nullable = false)
     private Exercise exercise;
 
     @Column(name = "notes")
     private String notes;
+
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
     @Column(name = "sets", nullable = false)
     private int sets;
