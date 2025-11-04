@@ -16,6 +16,8 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -75,4 +77,14 @@ public class AthleteProgressManager implements AthleteProgressService {
                 .map(mapper::toResponse)
                 .toList();
     }
+
+    @Override
+    public int getTotalPointsLastMonth(UUID athleteId) {
+        return repository.getTotalPointsLastMonth(athleteId, LocalDateTime.now().minusMonths(1));
+    }
+
+//    @Override
+//    public int countByAthleteIdAndCreatedAtAfter(UUID athleteId) {
+//        return repository.getTotalPointsLastMonth(athleteId, LocalDateTime.now().minusMonths(1));
+//    }
 }

@@ -30,7 +30,7 @@ public class FeedManager implements FeedService {
         HomeFeedResponse response = new HomeFeedResponse();
         response.setUser(userMapper.toResponse(athlete.getUser()));
         response.setWorkoutItems(workoutItemService.findByAllInToday(athleteId, LocalDate.now()));
-        response.setAthleteProgresses(athleteProgressService.findByAthleteId(athleteId));
+        response.setTotalPoint(athleteProgressService.getTotalPointsLastMonth(athleteId));
         return response;
     }
 
@@ -45,6 +45,7 @@ public class FeedManager implements FeedService {
     public ProfileResponse getProfileFeed(UUID athleteId) {
         ProfileResponse response = new ProfileResponse();
         response.setUser(userMapper.toResponse(athleteService.findById(athleteId).getUser()));
+        response.setTotalPoint(athleteProgressService.getTotalPointsLastMonth(athleteId));
         return response;
     }
 }

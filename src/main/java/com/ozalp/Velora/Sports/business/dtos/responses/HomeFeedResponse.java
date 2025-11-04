@@ -13,6 +13,6 @@ public class HomeFeedResponse {
 
     private List<CreateWorkoutItemResponse> workoutItems;
 
-    private List<CreateAthleteProgressResponse> athleteProgresses;
+    private int totalPoint;
 
 }
