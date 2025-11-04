@@ -1,4 +1,4 @@
-package com.ozalp.Velora.Sports.controllers;
+package com.ozalp.Velora.Sports.controllers.api;
 
 import com.ozalp.Velora.Sports.business.abstracts.FeedService;
 import lombok.AllArgsConstructor;
@@ -19,5 +19,15 @@ public class FeedController {
     @PostMapping("/getHomeFeed")
     ResponseEntity<?> getHomeFeed(UUID athleteId) {
         return ResponseEntity.ok(feedService.getHomeFeed(athleteId));
+    }
+
+    @PostMapping("/getTaskFeed")
+    ResponseEntity<?> getTaskFeed(UUID athleteId) {
+        return ResponseEntity.ok(feedService.getTaskFeed(athleteId));
+    }
+
+    @PostMapping("/getProfileFeed")
+    ResponseEntity<?> getProfileFeed(UUID athleteId) {
+        return ResponseEntity.ok(feedService.getProfileFeed(athleteId));
     }
 }

@@ -1,10 +1,13 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
-import com.ozalp.Velora.Sports.business.abstracts.*;
+import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
+import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
+import com.ozalp.Velora.Sports.business.abstracts.FeedService;
+import com.ozalp.Velora.Sports.business.abstracts.WorkoutItemService;
 import com.ozalp.Velora.Sports.business.dtos.responses.HomeFeedResponse;
-import com.ozalp.Velora.Sports.business.mappers.AthleteProgressMapper;
+import com.ozalp.Velora.Sports.business.dtos.responses.ProfileResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.TaskFeedResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
-import com.ozalp.Velora.Sports.business.mappers.WorkoutProgramMapper;
 import com.ozalp.Velora.Sports.entities.concretes.Athlete;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,8 +29,22 @@ public class FeedManager implements FeedService {
         Athlete athlete = athleteService.findById(athleteId);
         HomeFeedResponse response = new HomeFeedResponse();
         response.setUser(userMapper.toResponse(athlete.getUser()));
-       response.setWorkoutItems(workoutItemService.findByAllInToday(athleteId, LocalDate.now()));
+        response.setWorkoutItems(workoutItemService.findByAllInToday(athleteId, LocalDate.now()));
         response.setAthleteProgresses(athleteProgressService.findByAthleteId(athleteId));
+        return response;
+    }
+
+    @Override
+    public TaskFeedResponse getTaskFeed(UUID athleteId) {
+        TaskFeedResponse response = new TaskFeedResponse();
+        response.setWorkoutItems(workoutItemService.findByAllInToday(athleteId, LocalDate.now()));
+        return response;
+    }
+
+    @Override
+    public ProfileResponse getProfileFeed(UUID athleteId) {
+        ProfileResponse response = new ProfileResponse();
+        response.setUser(userMapper.toResponse(athleteService.findById(athleteId).getUser()));
         return response;
     }
 }
