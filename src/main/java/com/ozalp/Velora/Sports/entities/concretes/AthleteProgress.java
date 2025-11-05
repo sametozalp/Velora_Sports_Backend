@@ -41,11 +41,16 @@ public class AthleteProgress extends BaseEntity {
     @Column(name = "points_earned", nullable = false)
     private Integer pointsEarned;
 
-    public AthleteProgress(Athlete athlete, PointType pointType, UUID targetItemId, AthleteProgressStatus athleteProgressStatus, Integer pointsEarned) {
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
+    public AthleteProgress(Athlete athlete, PointType pointType, UUID targetItemId, AthleteProgressStatus athleteProgressStatus, Integer pointsEarned, Organization organization) {
         this.athlete = athlete;
         this.pointType = pointType;
         this.targetItemId = targetItemId;
         this.athleteProgressStatus = athleteProgressStatus;
         this.pointsEarned = pointsEarned;
+        this.organization = organization;
     }
 }
