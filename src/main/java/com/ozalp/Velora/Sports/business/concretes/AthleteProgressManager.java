@@ -5,6 +5,7 @@ import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummaryResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateAthleteProgressResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.DailyAthleteScore;
 import com.ozalp.Velora.Sports.business.mappers.AthleteProgressMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.AthleteProgressRepository;
@@ -18,6 +19,7 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -124,6 +126,19 @@ public class AthleteProgressManager implements AthleteProgressService {
         }
         return responses;
     }
+
+    @Override
+    public List<DailyAthleteScore> getDailyAthleteScoreDetails(UUID athleteId) {
+        LocalDateTime oneMonthAgo = LocalDateTime.now().minusMonths(1);
+        List<DailyAthleteScore> sqlResults = repository.getDailyAthleteScoreDetails(athleteId, oneMonthAgo);
+        return sqlResults.stream()
+                .map(r -> new DailyAthleteScore(
+                        r.getDate(),
+                        r.getTotalPoints()
+                ))
+                .toList();
+    }
+
 
 //    @Override
 //    public int countByAthleteIdAndCreatedAtAfter(UUID athleteId) {

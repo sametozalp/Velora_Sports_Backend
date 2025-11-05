@@ -1,6 +1,7 @@
 package com.ozalp.Velora.Sports.dataAcess;
 
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
+import com.ozalp.Velora.Sports.business.dtos.responses.DailyAthleteScore;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -45,8 +46,41 @@ public interface AthleteProgressRepository extends JpaRepository<AthleteProgress
                   AND ap.completedAt >= :startDate
                 GROUP BY ap.athlete
             """)
-    List<AthleteScoreSummary> getAthleteTotalScoresForLastMonth(
-            @Param("organizationId") UUID organizationId,
+    List<AthleteScoreSummary> getAthleteTotalScoresForLastMonth( // tüm atletlerin son bir aydaki toplam puan listesi
+                                                                 @Param("organizationId") UUID organizationId,
+                                                                 @Param("startDate") LocalDateTime startDate
+    );
+
+//    @Query("""
+//                SELECT new com.ozalp.Velora.Sports.business.dtos.responses.DailyAthleteScore(
+//                    DATE(ap.completedAt),
+//                    SUM(ap.pointsEarned)
+//                )
+//                FROM AthleteProgress ap
+//                WHERE ap.athlete.id = :athleteId
+//                  AND ap.completedAt >= :startDate
+//                GROUP BY DATE(ap.completedAt)
+//                ORDER BY DATE(ap.completedAt)
+//            """)
+//    List<DailyAthleteScore> getDailyAthleteScoreDetails(
+//            @Param("athleteId") UUID athleteId,
+//            @Param("startDate") LocalDate startDate
+//    ); // son bir atlete ait günlük toplam puan listesi
+//
+
+    @Query("""
+    SELECT new com.ozalp.Velora.Sports.business.dtos.responses.DailyAthleteScore(
+        CAST(ap.completedAt AS date),
+        SUM(ap.pointsEarned)
+    )
+    FROM AthleteProgress ap
+    WHERE ap.athlete.id = :athleteId
+      AND ap.completedAt >= :startDate
+    GROUP BY CAST(ap.completedAt AS date)
+    ORDER BY CAST(ap.completedAt AS date)
+""")
+    List<DailyAthleteScore> getDailyAthleteScoreDetails(
+            @Param("athleteId") UUID athleteId,
             @Param("startDate") LocalDateTime startDate
     );
 

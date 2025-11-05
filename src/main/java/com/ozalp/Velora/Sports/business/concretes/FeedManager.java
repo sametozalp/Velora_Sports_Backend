@@ -4,9 +4,9 @@ import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.abstracts.FeedService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutItemService;
-import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummaryResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.HomeFeedResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.ProfileResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.StaticsFeedResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.TaskFeedResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.entities.concretes.Athlete;
@@ -14,7 +14,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -54,7 +53,10 @@ public class FeedManager implements FeedService {
     }
 
     @Override
-    public List<AthleteScoreSummaryResponse> getStaticsFeed(UUID organizationId) {
-        return athleteProgressService.getLastMonthScores(organizationId);
+    public StaticsFeedResponse getStaticsFeed(UUID athleteId, UUID organizationId) {
+        return new StaticsFeedResponse(
+                athleteProgressService.getDailyAthleteScoreDetails(athleteId),
+                athleteProgressService.getLastMonthScores(organizationId)
+        );
     }
 }
