@@ -15,4 +15,6 @@ public class HomeFeedResponse {
 
     private int totalPoint;
 
+    private int completedRate;
+
 }

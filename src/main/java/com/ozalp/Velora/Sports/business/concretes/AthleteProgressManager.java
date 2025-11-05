@@ -88,7 +88,21 @@ public class AthleteProgressManager implements AthleteProgressService {
         int successCount = repository.countByAthleteIdAndCompletedAtIsNotNull(athleteId);
         int failedCount = repository.countByAthleteIdAndCompletedAtIsNull(athleteId);
         int totalCount = successCount + failedCount;
+        if (totalCount == 0) {
+            return 0;
+        }
         return (successCount / totalCount) * 100;
+    }
+
+    @Override
+    public int getCompletedTaskRateToday(UUID athleteId) {
+        int countCompletedTask = repository.countByAthleteIdAndCompletedAtBetween(athleteId, LocalDateTime.now(), LocalDateTime.now());
+        int countNotCompletedTask = repository.countByAthleteIdAndCompletedAtIsNullAndCompletedAtBetween(athleteId, LocalDateTime.now(), LocalDateTime.now());
+        int totalCount = countCompletedTask + countNotCompletedTask;
+        if (totalCount == 0) {
+            return 0;
+        }
+        return (countCompletedTask / totalCount) * 100;
     }
 
 //    @Override

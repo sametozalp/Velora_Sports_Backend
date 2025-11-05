@@ -11,6 +11,6 @@ public class ProfileResponse {
 
     private int totalPoint;
 
-    private int successRate;
+    private int generalSuccessRate;
 
 }

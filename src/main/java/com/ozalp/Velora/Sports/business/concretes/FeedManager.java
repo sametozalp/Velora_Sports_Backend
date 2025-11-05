@@ -31,6 +31,7 @@ public class FeedManager implements FeedService {
         response.setUser(userMapper.toResponse(athlete.getUser()));
         response.setWorkoutItems(workoutItemService.findByAllInToday(athleteId, LocalDate.now()));
         response.setTotalPoint(athleteProgressService.getTotalPointsLastMonth(athleteId));
+        response.setCompletedRate(athleteProgressService.getCompletedTaskRateToday(athleteId));
         return response;
     }
 
@@ -46,7 +47,7 @@ public class FeedManager implements FeedService {
         ProfileResponse response = new ProfileResponse();
         response.setUser(userMapper.toResponse(athleteService.findById(athleteId).getUser()));
         response.setTotalPoint(athleteProgressService.getTotalPointsLastMonth(athleteId));
-        response.setSuccessRate(athleteProgressService.getSuccessRate(athleteId));
+        response.setGeneralSuccessRate(athleteProgressService.getSuccessRate(athleteId));
         return response;
     }
 }

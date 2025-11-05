@@ -26,4 +26,8 @@ public interface AthleteProgressRepository extends JpaRepository<AthleteProgress
 
     int countByAthleteIdAndCompletedAtIsNull(UUID athleteId); // başarılı olma sayısı
 
+    int countByAthleteIdAndCompletedAtBetween(UUID athleteId, LocalDateTime startOfDay, LocalDateTime endOfDay); // bugünkü tamamlananlar
+
+    int countByAthleteIdAndCompletedAtIsNullAndCompletedAtBetween(UUID athleteId, LocalDateTime startOfDay, LocalDateTime endOfDay); // bugünkü tamamlanmayanlar
+
 }
