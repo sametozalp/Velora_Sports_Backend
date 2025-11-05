@@ -30,4 +30,7 @@ public interface AthleteProgressRepository extends JpaRepository<AthleteProgress
 
     int countByAthleteIdAndCompletedAtIsNullAndCompletedAtBetween(UUID athleteId, LocalDateTime startOfDay, LocalDateTime endOfDay); // bugünkü tamamlanmayanlar
 
+    @Query("SELECT COALESCE(a.pointsEarned, 0) FROM AthleteProgress a " +
+            "WHERE a.athlete.id = :athleteId")
+    int getTotalPoint(@Param("athleteId") UUID athleteId);
 }
