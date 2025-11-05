@@ -10,4 +10,7 @@ public class ProfileResponse {
     private CreateUserResponse user;
 
     private int totalPoint;
+
+    private int successRate;
+
 }

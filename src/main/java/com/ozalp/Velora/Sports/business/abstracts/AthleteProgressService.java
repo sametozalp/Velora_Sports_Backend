@@ -19,4 +19,6 @@ public interface AthleteProgressService extends BaseService<AthleteProgress> {
     //int countByAthleteIdAndCreatedAtAfter(UUID athleteId); // kaç tane aktivite
 
     int getTotalPointsLastMonth(UUID athleteId);
+
+    int getSuccessRate(UUID athleteId);
 }

@@ -83,6 +83,14 @@ public class AthleteProgressManager implements AthleteProgressService {
         return repository.getTotalPointsLastMonth(athleteId, LocalDateTime.now().minusMonths(1));
     }
 
+    @Override
+    public int getSuccessRate(UUID athleteId) {
+        int successCount = repository.countByAthleteIdAndCompletedAtIsNotNull(athleteId);
+        int failedCount = repository.countByAthleteIdAndCompletedAtIsNull(athleteId);
+        int totalCount = successCount + failedCount;
+        return (successCount / totalCount) * 100;
+    }
+
 //    @Override
 //    public int countByAthleteIdAndCreatedAtAfter(UUID athleteId) {
 //        return repository.getTotalPointsLastMonth(athleteId, LocalDateTime.now().minusMonths(1));

@@ -21,4 +21,9 @@ public interface AthleteProgressRepository extends JpaRepository<AthleteProgress
     int getTotalPointsLastMonth(@Param("athleteId") UUID athleteId,
                                 @Param("oneMonthAgo") LocalDateTime oneMonthAgo);
 
+
+    int countByAthleteIdAndCompletedAtIsNotNull(UUID athleteId); // başarısız olma sayısı
+
+    int countByAthleteIdAndCompletedAtIsNull(UUID athleteId); // başarılı olma sayısı
+
 }

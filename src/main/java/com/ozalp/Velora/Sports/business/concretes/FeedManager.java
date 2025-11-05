@@ -46,6 +46,7 @@ public class FeedManager implements FeedService {
         ProfileResponse response = new ProfileResponse();
         response.setUser(userMapper.toResponse(athleteService.findById(athleteId).getUser()));
         response.setTotalPoint(athleteProgressService.getTotalPointsLastMonth(athleteId));
+        response.setSuccessRate(athleteProgressService.getSuccessRate(athleteId));
         return response;
     }
 }
