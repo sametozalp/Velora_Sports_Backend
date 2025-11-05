@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.dataAcess;
 
+import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -33,6 +34,21 @@ public interface AthleteProgressRepository extends JpaRepository<AthleteProgress
     @Query("SELECT COALESCE(a.pointsEarned, 0) FROM AthleteProgress a " +
             "WHERE a.athlete.id = :athleteId")
     int getTotalPoint(@Param("athleteId") UUID athleteId);
+
+    @Query("""
+                SELECT new com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary(
+                    ap.athlete,
+                    SUM(ap.pointsEarned)
+                )
+                FROM AthleteProgress ap
+                WHERE ap.organization.id = :organizationId
+                  AND ap.completedAt >= :startDate
+                GROUP BY ap.athlete
+            """)
+    List<AthleteScoreSummary> getAthleteTotalScoresForLastMonth(
+            @Param("organizationId") UUID organizationId,
+            @Param("startDate") LocalDateTime startDate
+    );
 
 
 }

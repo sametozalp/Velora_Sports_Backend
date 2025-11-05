@@ -2,6 +2,8 @@ package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
+import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
+import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummaryResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateAthleteProgressResponse;
 import com.ozalp.Velora.Sports.business.mappers.AthleteProgressMapper;
 import com.ozalp.Velora.Sports.common.Messages;
@@ -16,8 +18,8 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -104,6 +106,23 @@ public class AthleteProgressManager implements AthleteProgressService {
             return 0;
         }
         return (countCompletedTask / totalCount) * 100;
+    }
+
+    @Override
+    public List<AthleteScoreSummaryResponse> getLastMonthScores(UUID organizationId) {
+        LocalDateTime startDate = LocalDateTime.now().minusMonths(1);
+        List<AthleteScoreSummary> athleteTotalScoresForLastMonth =
+                repository.getAthleteTotalScoresForLastMonth(organizationId, startDate);
+        List<AthleteScoreSummaryResponse> responses = new ArrayList<>();
+        for (AthleteScoreSummary summary : athleteTotalScoresForLastMonth) {
+            responses.add(new AthleteScoreSummaryResponse(
+                    summary.getAthlete().getId(),
+                    summary.getAthlete().getUser().getFirstName(),
+                    summary.getAthlete().getUser().getLastName(),
+                    summary.getTotalScore()
+            ));
+        }
+        return responses;
     }
 
 //    @Override

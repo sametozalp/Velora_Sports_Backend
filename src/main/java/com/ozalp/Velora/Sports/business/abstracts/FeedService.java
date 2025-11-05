@@ -13,4 +13,6 @@ public interface FeedService {
     TaskFeedResponse getTaskFeed(UUID athleteId);
 
     ProfileResponse getProfileFeed(UUID athleteId);
+
+    Object getStaticsFeed(UUID organizationId);
 }

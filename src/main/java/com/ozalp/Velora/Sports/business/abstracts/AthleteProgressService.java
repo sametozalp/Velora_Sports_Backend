@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.abstracts;
 
+import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummaryResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateAthleteProgressResponse;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
 import com.ozalp.Velora.Sports.entities.concretes.WorkoutItem;
@@ -23,4 +24,6 @@ public interface AthleteProgressService extends BaseService<AthleteProgress> {
     int getSuccessRate(UUID athleteId);
 
     int getCompletedTaskRateToday(UUID athleteId);
+
+    List<AthleteScoreSummaryResponse> getLastMonthScores(UUID organizationId);
 }
