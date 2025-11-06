@@ -19,7 +19,6 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,6 +71,11 @@ public class AthleteProgressManager implements AthleteProgressService {
         }
 
         athleteProgress.setAthleteProgressStatus(athleteProgressStatus);
+        if (athleteProgressStatus == AthleteProgressStatus.COMPLETED) {
+            athleteProgress.setCompletedAt(LocalDateTime.now());
+        } else {
+            athleteProgress.setCompletedAt(null);
+        }
         return mapper.toResponse(save(athleteProgress));
     }
 
