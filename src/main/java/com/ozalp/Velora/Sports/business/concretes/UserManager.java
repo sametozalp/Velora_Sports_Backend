@@ -14,6 +14,7 @@ import com.ozalp.Velora.Sports.entities.concretes.UserRole;
 import com.ozalp.Velora.Sports.entities.enums.RoleEnum;
 import com.ozalp.Velora.Sports.entities.enums.UserStatus;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,7 @@ public class UserManager implements UserService {
         return repository.save(user);
     }
 
+    @Transactional
     @Override
     public CreateUserResponse create(CreateUserRequest request) {
         User user = mapper.toEntity(request);
