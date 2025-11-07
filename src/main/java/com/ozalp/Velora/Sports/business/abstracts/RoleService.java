@@ -11,4 +11,6 @@ public interface RoleService extends BaseService<Role> {
 
     CreateRoleResponse create(RoleEnum request);
 
+    Role findByName(RoleEnum name);
+
 }

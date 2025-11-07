@@ -8,8 +8,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.util.Collection;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -18,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
-public class User extends BaseEntity {
+public class User extends BaseEntity implements UserDetails {
 
     @Column(name = "first_name", nullable = false)
     private String firstName;
@@ -61,4 +65,15 @@ public class User extends BaseEntity {
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Coach coach;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (this.roles == null)
+            return new HashSet<>();
+
+        return (Collection<? extends GrantedAuthority>) roles.stream()
+                .map(UserRole::getRole)
+                .toList();
+
+    }
 }

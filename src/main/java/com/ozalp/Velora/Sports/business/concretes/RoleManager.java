@@ -5,10 +5,10 @@ import com.ozalp.Velora.Sports.business.dtos.requests.CreateRoleRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateRoleResponse;
 import com.ozalp.Velora.Sports.business.mappers.RoleMapper;
 import com.ozalp.Velora.Sports.common.Messages;
+import com.ozalp.Velora.Sports.dataAcess.RoleRepository;
 import com.ozalp.Velora.Sports.entities.concretes.Role;
 import com.ozalp.Velora.Sports.entities.enums.RoleEnum;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
-import com.ozalp.Velora.Sports.dataAcess.RoleRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +46,10 @@ public class RoleManager implements RoleService {
     public CreateRoleResponse create(RoleEnum request) {
         Role role = new Role(request);
         return mapper.toResponse(repository.save(role));
+    }
+
+    @Override
+    public Role findByName(RoleEnum name) {
+        return repository.findByName(name);
     }
 }
