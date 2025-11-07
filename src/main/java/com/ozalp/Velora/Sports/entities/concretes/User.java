@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -75,5 +76,11 @@ public class User extends BaseEntity implements UserDetails {
                 .map(UserRole::getRole)
                 .toList();
 
+    }
+
+    public List<String> getAllRoles() {
+        return getRoles().stream()
+                .map(r->r.getRole().getName().name())
+                .toList();
     }
 }
