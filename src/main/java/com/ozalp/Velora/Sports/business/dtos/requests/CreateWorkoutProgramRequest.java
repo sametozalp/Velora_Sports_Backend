@@ -8,7 +8,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateWorkoutProgramRequest extends BaseRequest {
+public class CreateWorkoutProgramRequest {
 
     private UUID coachId;
 

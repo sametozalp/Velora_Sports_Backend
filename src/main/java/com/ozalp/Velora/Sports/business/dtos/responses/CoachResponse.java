@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CoachResponse extends BaseResponse {
+public class CoachResponse {
 
     CreateUserResponse user;
 }

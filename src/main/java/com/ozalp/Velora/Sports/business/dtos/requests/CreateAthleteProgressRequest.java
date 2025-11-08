@@ -9,7 +9,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateAthleteProgressRequest extends BaseRequest {
+public class CreateAthleteProgressRequest {
 
     @NotNull
     @NotBlank

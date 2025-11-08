@@ -7,7 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateOrganizationRequest extends BaseRequest {
+public class CreateOrganizationRequest {
 
     @NotBlank
     @NotNull

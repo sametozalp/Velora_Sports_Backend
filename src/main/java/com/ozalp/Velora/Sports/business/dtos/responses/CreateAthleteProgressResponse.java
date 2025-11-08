@@ -7,7 +7,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateAthleteProgressResponse extends BaseResponse {
+public class CreateAthleteProgressResponse {
 
     private UUID id;
 
