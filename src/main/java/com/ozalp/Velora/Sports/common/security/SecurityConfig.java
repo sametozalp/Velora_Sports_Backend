@@ -3,6 +3,7 @@ package com.ozalp.Velora.Sports.common.security;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -14,6 +15,7 @@ import java.util.List;
 
 @Configuration
 @AllArgsConstructor
+@EnableMethodSecurity(prePostEnabled = true, jsr250Enabled = true)
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
