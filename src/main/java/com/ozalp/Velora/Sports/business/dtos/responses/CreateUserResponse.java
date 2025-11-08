@@ -19,4 +19,6 @@ public class CreateUserResponse extends BaseResponse {
     private String email;
 
     private String accessToken;
+
+    private String refreshToken;
 }

@@ -22,7 +22,8 @@ public class AuthManager implements AuthService {
     public CreateUserResponse register(CreateUserRequest request) {
         CreateUserResponse response = userService.create(request);
         User user = userService.findById(response.getId());
-        response.setAccessToken(jwtService.generateToken(user));
+        response.setAccessToken(jwtService.generateAccessToken(user));
+        response.setRefreshToken(jwtService.generateRefreshToken(user).getRefreshToken());
         return response;
     }
 }
