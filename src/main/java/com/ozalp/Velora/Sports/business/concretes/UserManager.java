@@ -64,6 +64,7 @@ public class UserManager implements UserService {
         }
         UserRole userRole = new UserRole();
         userRole.setRole(role);
+        userRole.setUser(user);
         user.setRoles(new HashSet<>(List.of(userRole)));
         user.setAthlete(athlete);
         User saved = repository.save(user);
