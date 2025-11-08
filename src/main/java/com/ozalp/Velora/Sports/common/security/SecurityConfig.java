@@ -10,17 +10,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.List;
+
 @Configuration
 @AllArgsConstructor
 public class SecurityConfig {
 
     private final JwtFilter jwtFilter;
 
+    private static final String[] WHITE_LIST_URLS = {
+            //"/swagger-ui/**",
+            //"/swagger-ui.html",
+            //"/v3/api-docs",
+            //"/v3/api-docs/**",
+            "/api/auth/**",
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .requestMatchers(WHITE_LIST_URLS).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session ->
