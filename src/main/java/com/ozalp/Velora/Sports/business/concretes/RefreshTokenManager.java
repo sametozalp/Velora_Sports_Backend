@@ -4,7 +4,7 @@ import com.ozalp.Velora.Sports.business.abstracts.RefreshTokenService;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.RefreshTokenRepository;
 import com.ozalp.Velora.Sports.entities.concretes.RefreshToken;
-import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

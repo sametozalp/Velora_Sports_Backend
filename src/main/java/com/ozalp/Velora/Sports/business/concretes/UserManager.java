@@ -13,7 +13,7 @@ import com.ozalp.Velora.Sports.entities.concretes.User;
 import com.ozalp.Velora.Sports.entities.concretes.UserRole;
 import com.ozalp.Velora.Sports.entities.enums.RoleEnum;
 import com.ozalp.Velora.Sports.entities.enums.UserStatus;
-import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;

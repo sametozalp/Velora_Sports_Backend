@@ -10,7 +10,7 @@ import com.ozalp.Velora.Sports.business.mappers.WorkoutItemMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.WorkoutItemRepository;
 import com.ozalp.Velora.Sports.entities.concretes.WorkoutItem;
-import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;

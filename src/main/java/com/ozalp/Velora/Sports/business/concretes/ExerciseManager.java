@@ -6,8 +6,8 @@ import com.ozalp.Velora.Sports.business.dtos.responses.CreateExerciseResponse;
 import com.ozalp.Velora.Sports.business.mappers.ExerciseMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Exercise;
-import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import com.ozalp.Velora.Sports.dataAcess.ExerciseRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

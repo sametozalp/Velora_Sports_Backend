@@ -15,7 +15,7 @@ import com.ozalp.Velora.Sports.entities.concretes.WorkoutItem;
 import com.ozalp.Velora.Sports.entities.enums.AthleteProgressStatus;
 import com.ozalp.Velora.Sports.entities.enums.PointType;
 import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
-import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
