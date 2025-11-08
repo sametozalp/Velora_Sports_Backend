@@ -2,6 +2,7 @@ package com.ozalp.Velora.Sports.exceptions;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.ozalp.Velora.Sports.exceptions.errors.InvalidTokenException;
+import com.ozalp.Velora.Sports.exceptions.errors.NotMatchedException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -19,6 +20,11 @@ import java.util.Map;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(NotMatchedException.class)
+    ResponseEntity<?> entityNotFound(NotMatchedException e) {
+        return ResponseEntity.badRequest().body(Map.of("message", e.getLocalizedMessage()));
+    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     ResponseEntity<?> entityNotFound(EntityNotFoundException e) {

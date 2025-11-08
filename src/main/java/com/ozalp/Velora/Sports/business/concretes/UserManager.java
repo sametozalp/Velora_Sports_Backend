@@ -70,4 +70,10 @@ public class UserManager implements UserService {
         return mapper.toResponse(findById(saved.getId()));
     }
 
+    @Override
+    public User findByEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new EntityNotFoundException(Messages.UserMessages.NOT_FOUND));
+    }
+
 }

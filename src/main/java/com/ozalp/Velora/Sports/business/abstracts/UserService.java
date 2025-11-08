@@ -10,4 +10,5 @@ public interface UserService extends BaseService<User> {
 
     CreateUserResponse create(CreateUserRequest request);
 
+    User findByEmail(String email);
 }

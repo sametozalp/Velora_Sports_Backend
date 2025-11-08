@@ -2,6 +2,7 @@ package com.ozalp.Velora.Sports.controllers.api;
 
 import com.ozalp.Velora.Sports.business.abstracts.AuthService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
+import com.ozalp.Velora.Sports.business.dtos.requests.LoginRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -22,5 +23,10 @@ public class AuthController {
     @PostMapping("/refreshToken/{refreshToken}")
     ResponseEntity<?> refreshToken(@PathVariable String refreshToken) {
         return ResponseEntity.ok(authService.refreshToken(refreshToken));
+    }
+
+    @PostMapping("/login")
+    ResponseEntity<?> login(@Valid @RequestBody LoginRequest request) {
+        return ResponseEntity.ok(authService.login(request));
     }
 }

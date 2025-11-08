@@ -2,6 +2,11 @@ package com.ozalp.Velora.Sports.common;
 
 public class Messages {
 
+    public static class AuthMessages {
+
+        public static final String PASSWORDS_NOT_MATCHED = "Passwords not matched";
+    }
+
     public static class RefreshToken {
         public static final String NOT_FOUND = "Refresh token not found";
         public static final String INVALID_TOKEN = "Invalid token";
