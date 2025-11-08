@@ -65,11 +65,11 @@ public class AthleteProgressManager implements AthleteProgressService {
 
     @Override
     public CreateAthleteProgressResponse setStatus(UUID athleteId, UUID athleteProgressId, AthleteProgressStatus athleteProgressStatus) {
-        String securityUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        String securityEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         AthleteProgress athleteProgress = findById(athleteProgressId);
         Athlete athlete = athleteProgress.getAthlete();
 
-        if (!securityUsername.equals(athlete.getUser().getEmail())) {
+        if (!securityEmail.equals(athlete.getUser().getEmail())) {
             throw new AuthorizationException(Messages.AthleteProgress.NOT_MATCHED);
         }
 
