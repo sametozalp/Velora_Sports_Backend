@@ -1,13 +1,15 @@
 package com.ozalp.Velora.Sports.common.security;
 
 import com.ozalp.Velora.Sports.business.abstracts.RefreshTokenService;
+import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.RefreshToken;
 import com.ozalp.Velora.Sports.entities.concretes.User;
+import com.ozalp.Velora.Sports.exceptions.errors.InvalidTokenException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import lombok.AllArgsConstructor;
+import org.antlr.v4.runtime.misc.Pair;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -44,10 +46,20 @@ public class JwtService {
     }
 
     public RefreshToken generateRefreshToken(User user) {
+        refreshTokenService.deleteUserRefreshTokens(user.getId());
         String token = UUID.randomUUID().toString() + System.currentTimeMillis();
         LocalDateTime expiration = LocalDateTime.now().plusDays(7);
         RefreshToken refreshToken = new RefreshToken(user, token, expiration);
         return refreshTokenService.save(refreshToken);
+    }
+
+    public Pair<String, RefreshToken> refreshAccessToken(String refreshToken) {
+        RefreshToken refreshTokenEntity = refreshTokenService.findByRefreshToken(refreshToken);
+        if (refreshTokenEntity.isExpired()) {
+            throw new InvalidTokenException(Messages.RefreshToken.INVALID_TOKEN);
+        }
+        User user = refreshTokenEntity.getUser();
+        return new Pair<>(generateAccessToken(user), generateRefreshToken(user));
     }
 
     private SecretKey getSignKey() {

@@ -8,6 +8,7 @@ import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -30,5 +31,20 @@ public class RefreshTokenManager implements RefreshTokenService {
     @Override
     public RefreshToken save(RefreshToken refreshToken) {
         return repository.save(refreshToken);
+    }
+
+    @Override
+    public void deleteUserRefreshTokens(UUID userId) {
+        List<RefreshToken> refreshTokens = repository.findByUserIdAndDeletedAtIsNull(userId);
+        for(RefreshToken refreshToken: refreshTokens) {
+            refreshToken.markAsDeleted();
+            repository.save(refreshToken);
+        }
+    }
+
+    @Override
+    public RefreshToken findByRefreshToken(String refreshToken) {
+        return repository.findByRefreshToken(refreshToken)
+                .orElseThrow(() -> new EntityNotFoundException(Messages.RefreshToken.NOT_FOUND));
     }
 }

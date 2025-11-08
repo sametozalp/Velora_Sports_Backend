@@ -2,8 +2,11 @@ package com.ozalp.Velora.Sports.business.abstracts;
 
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
-import jakarta.validation.Valid;
+import com.ozalp.Velora.Sports.business.dtos.responses.RefreshTokenResponse;
 
 public interface AuthService {
-    CreateUserResponse register(@Valid CreateUserRequest request);
+    CreateUserResponse register(CreateUserRequest request);
+
+    RefreshTokenResponse refreshToken(String refreshToken);
+
 }

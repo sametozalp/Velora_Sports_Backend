@@ -4,6 +4,7 @@ public class Messages {
 
     public static class RefreshToken {
         public static final String NOT_FOUND = "Refresh token not found";
+        public static final String INVALID_TOKEN = "Invalid token";
     }
 
     public static class AthleteProgress {
