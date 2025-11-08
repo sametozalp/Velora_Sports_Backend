@@ -1,4 +1,4 @@
-package com.ozalp.Velora.Sports;
+package com.ozalp.Velora.Sports.services;
 
 import com.ozalp.Velora.Sports.business.abstracts.RoleService;
 import com.ozalp.Velora.Sports.business.concretes.UserManager;
