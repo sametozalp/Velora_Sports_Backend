@@ -16,6 +16,7 @@ import com.ozalp.Velora.Sports.entities.enums.UserStatus;
 import com.ozalp.Velora.Sports.exceptions.errors.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -29,6 +30,7 @@ public class UserManager implements UserService {
     private final UserMapper mapper;
     private final UserRepository repository;
     private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User create(User user) {
@@ -51,6 +53,7 @@ public class UserManager implements UserService {
     public CreateUserResponse create(CreateUserRequest request) {
         User user = mapper.toEntity(request);
         user.setUserStatus(UserStatus.ACTIVE);
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
         Athlete athlete = new Athlete();
         athlete.setUser(user);
         Role role = roleService.findByName(RoleEnum.ROLE_ATHLETE);

@@ -17,4 +17,6 @@ public class CreateUserResponse extends BaseResponse {
     private String lastName;
 
     private String email;
+
+    private String accessToken;
 }

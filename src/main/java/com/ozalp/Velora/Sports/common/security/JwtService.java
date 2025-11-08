@@ -1,4 +1,4 @@
-package com.ozalp.Velora.Sports.security;
+package com.ozalp.Velora.Sports.common.security;
 
 import com.ozalp.Velora.Sports.entities.concretes.User;
 import io.jsonwebtoken.Claims;

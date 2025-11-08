@@ -1,4 +1,4 @@
-package com.ozalp.Velora.Sports.security;
+package com.ozalp.Velora.Sports.common.security;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

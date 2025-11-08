@@ -1,4 +1,4 @@
-package com.ozalp.Velora.Sports.security;
+package com.ozalp.Velora.Sports.common.security;
 
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
