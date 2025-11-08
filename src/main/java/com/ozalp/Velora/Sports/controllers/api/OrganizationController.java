@@ -5,6 +5,7 @@ import com.ozalp.Velora.Sports.business.dtos.requests.CreateOrganizationRequest;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ public class OrganizationController {
 
     private final OrganizationService organizationService;
 
+    @PreAuthorize("hasRole('SUPER_ADMIN')")
     @PostMapping("/create")
     ResponseEntity<?> create(@Valid @RequestBody CreateOrganizationRequest request) {
         return ResponseEntity.ok(organizationService.create(request));

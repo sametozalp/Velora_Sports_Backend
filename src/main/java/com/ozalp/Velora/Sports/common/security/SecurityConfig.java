@@ -19,10 +19,10 @@ public class SecurityConfig {
     private final JwtFilter jwtFilter;
 
     private static final String[] WHITE_LIST_URLS = {
-            //"/swagger-ui/**",
-            //"/swagger-ui.html",
-            //"/v3/api-docs",
-            //"/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/swagger-ui.html",
+            "/v3/api-docs",
+            "/v3/api-docs/**",
             "/api/auth/**",
     };
 
