@@ -17,6 +17,7 @@ import com.ozalp.Velora.Sports.entities.enums.PointType;
 import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -64,9 +65,11 @@ public class AthleteProgressManager implements AthleteProgressService {
 
     @Override
     public CreateAthleteProgressResponse setStatus(UUID athleteId, UUID athleteProgressId, AthleteProgressStatus athleteProgressStatus) {
+        String securityUsername = SecurityContextHolder.getContext().getAuthentication().getName();
         AthleteProgress athleteProgress = findById(athleteProgressId);
         Athlete athlete = athleteProgress.getAthlete();
-        if (!athlete.getId().equals(athleteService.findById(athleteId).getId())) {
+
+        if (!securityUsername.equals(athlete.getUser().getEmail())) {
             throw new AuthorizationException(Messages.AthleteProgress.NOT_MATCHED);
         }
 

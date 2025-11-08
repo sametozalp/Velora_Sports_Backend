@@ -1,6 +1,7 @@
 package com.ozalp.Velora.Sports.exceptions;
 
 import com.fasterxml.jackson.databind.exc.InvalidFormatException;
+import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
 import com.ozalp.Velora.Sports.exceptions.errors.InvalidTokenException;
 import com.ozalp.Velora.Sports.exceptions.errors.NotMatchedException;
 import jakarta.persistence.EntityNotFoundException;
@@ -21,18 +22,23 @@ import java.util.Map;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+    @ExceptionHandler(AuthorizationException.class)
+    ResponseEntity<?> handle(AuthorizationException e) {
+        return ResponseEntity.badRequest().body(Map.of("message", e.getLocalizedMessage()));
+    }
+
     @ExceptionHandler(NotMatchedException.class)
-    ResponseEntity<?> entityNotFound(NotMatchedException e) {
+    ResponseEntity<?> handle(NotMatchedException e) {
         return ResponseEntity.badRequest().body(Map.of("message", e.getLocalizedMessage()));
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
-    ResponseEntity<?> entityNotFound(EntityNotFoundException e) {
+    ResponseEntity<?> handle(EntityNotFoundException e) {
         return ResponseEntity.badRequest().body(Map.of("message", e.getLocalizedMessage()));
     }
 
     @ExceptionHandler(InvalidTokenException.class)
-    ResponseEntity<?> invalidToken(InvalidTokenException e) {
+    ResponseEntity<?> handle(InvalidTokenException e) {
         return ResponseEntity.badRequest().body(Map.of("message", e.getLocalizedMessage()));
     }
 
