@@ -7,10 +7,9 @@ import org.springframework.stereotype.Service;
 
 @Aspect
 @Service
-public class LoggingManager implements LoggingService {
+public class LoggingAspect {
 
     @Before("execution (* com.ozalp.Velora.Sports.business.concretes.*.*(..))")
-    @Override
     public void logBefore(JoinPoint joinPoint) {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getSimpleName();

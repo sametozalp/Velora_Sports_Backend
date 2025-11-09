@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.aop.annotations.CheckAthleteOwnership;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
@@ -9,15 +10,12 @@ import com.ozalp.Velora.Sports.business.dtos.responses.DailyAthleteScore;
 import com.ozalp.Velora.Sports.business.mappers.AthleteProgressMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.AthleteProgressRepository;
-import com.ozalp.Velora.Sports.entities.concretes.Athlete;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
 import com.ozalp.Velora.Sports.entities.concretes.WorkoutItem;
 import com.ozalp.Velora.Sports.entities.enums.AthleteProgressStatus;
 import com.ozalp.Velora.Sports.entities.enums.PointType;
-import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -64,15 +62,9 @@ public class AthleteProgressManager implements AthleteProgressService {
     }
 
     @Override
+    @CheckAthleteOwnership
     public CreateAthleteProgressResponse setStatus(UUID athleteId, UUID athleteProgressId, AthleteProgressStatus athleteProgressStatus) {
-        String securityEmail = SecurityContextHolder.getContext().getAuthentication().getName();
         AthleteProgress athleteProgress = findById(athleteProgressId);
-        Athlete athlete = athleteProgress.getAthlete();
-
-        if (!securityEmail.equals(athlete.getUser().getEmail())) {
-            throw new AuthorizationException(Messages.AthleteProgress.NOT_MATCHED);
-        }
-
         athleteProgress.setAthleteProgressStatus(athleteProgressStatus);
         if (athleteProgressStatus == AthleteProgressStatus.COMPLETED) {
             athleteProgress.setCompletedAt(LocalDateTime.now());
