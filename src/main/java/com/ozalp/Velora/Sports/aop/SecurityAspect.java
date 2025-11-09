@@ -1,14 +1,14 @@
 package com.ozalp.Velora.Sports.aop;
 
-import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
-import com.ozalp.Velora.Sports.business.abstracts.CoachService;
-import com.ozalp.Velora.Sports.business.abstracts.UserService;
+import com.ozalp.Velora.Sports.business.abstracts.*;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutItemRequest;
 import com.ozalp.Velora.Sports.common.Messages;
+import com.ozalp.Velora.Sports.entities.concretes.Athlete;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
 import com.ozalp.Velora.Sports.entities.concretes.Coach;
 import com.ozalp.Velora.Sports.entities.concretes.User;
 import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -25,7 +25,9 @@ public class SecurityAspect {
 
     private final AthleteProgressService athleteProgressService;
     private final UserService userService;
+    private final AthleteService athleteService;
     private final CoachService coachService;
+    private final WorkoutItemService workoutItemService;
 
     @Before("@annotation(CheckAthleteOwnership) && args(athleteId, athleteProgressId,..)")
     public void checkAthleteOwnership(UUID athleteId, UUID athleteProgressId) {
@@ -47,14 +49,19 @@ public class SecurityAspect {
         }
     }
 
-//    @Before("@annotation(CheckCoachOwnerShip) && args(request,..)")
-//    public void checkCoachOwnerShip(CreateWorkoutItemRequest request) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String securityEmail = authentication.getName();
-//        User authUser = userService.findByEmail(securityEmail);
-//        Coach coachUser = authUser.getCoach();
-//        if (coachUser == null) {
-//            return;
-//        }
-//    }
+    @Before("@annotation(CheckCoachOwnerShip) && args(request,..)")
+    public void checkCoachOwnerShip(CreateWorkoutItemRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String securityEmail = authentication.getName();
+        User authUser = userService.findByEmail(securityEmail);
+        Coach authCoachUser = authUser.getCoach();
+        if (authCoachUser == null) {
+            throw new EntityNotFoundException(Messages.CoachMessages.NOT_FOUND);
+        }
+
+        Athlete athlete = athleteService.findById(request.getAthleteId());
+        if (!athlete.getCoach().getId().equals(authCoachUser.getId())) {
+            throw new AuthorizationException(Messages.AthleteProgress.NOT_MATCHED);
+        }
+    }
 }
