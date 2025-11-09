@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.aop.annotations.CheckCoachOwnerShip;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.ExerciseService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutItemService;
@@ -47,6 +48,7 @@ public class WorkoutItemManager implements WorkoutItemService {
 
     @Transactional
     @Override
+    @CheckCoachOwnerShip
     public CreateWorkoutItemResponse create(CreateWorkoutItemRequest request) {
         WorkoutItem workoutItem = mapper.toEntity(request);
         workoutItem.setExercise(exerciseService.findById(request.getExerciseId()));

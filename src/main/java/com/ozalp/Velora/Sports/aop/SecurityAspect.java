@@ -2,6 +2,7 @@ package com.ozalp.Velora.Sports.aop;
 
 import com.ozalp.Velora.Sports.business.abstracts.*;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutItemRequest;
+import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutProgramRequest;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Athlete;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
@@ -51,6 +52,22 @@ public class SecurityAspect {
 
     @Before("@annotation(CheckCoachOwnerShip) && args(request,..)")
     public void checkCoachOwnerShip(CreateWorkoutItemRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String securityEmail = authentication.getName();
+        User authUser = userService.findByEmail(securityEmail);
+        Coach authCoachUser = authUser.getCoach();
+        if (authCoachUser == null) {
+            throw new EntityNotFoundException(Messages.CoachMessages.NOT_FOUND);
+        }
+
+        Athlete athlete = athleteService.findById(request.getAthleteId());
+        if (!athlete.getCoach().getId().equals(authCoachUser.getId())) {
+            throw new AuthorizationException(Messages.AthleteProgress.NOT_MATCHED);
+        }
+    }
+
+    @Before("@annotation(CheckCoachOwnerShip) && args(request,..)")
+    public void checkCoachOwnerShip(CreateWorkoutProgramRequest request) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String securityEmail = authentication.getName();
         User authUser = userService.findByEmail(securityEmail);

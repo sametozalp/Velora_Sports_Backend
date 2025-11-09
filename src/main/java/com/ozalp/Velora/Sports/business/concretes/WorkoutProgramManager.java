@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.aop.annotations.CheckCoachOwnerShip;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.abstracts.CoachService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutProgramService;
@@ -41,6 +42,7 @@ public class WorkoutProgramManager implements WorkoutProgramService {
     }
 
     @Override
+    @CheckCoachOwnerShip
     public CreateWorkoutProgramResponse create(CreateWorkoutProgramRequest request) {
         WorkoutProgram workoutProgram = mapper.toEntity(request);
         workoutProgram.setCoach(coachService.findById(request.getCoachId()));
