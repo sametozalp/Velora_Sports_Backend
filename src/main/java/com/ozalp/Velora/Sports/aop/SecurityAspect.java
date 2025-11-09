@@ -1,8 +1,13 @@
 package com.ozalp.Velora.Sports.aop;
 
 import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
+import com.ozalp.Velora.Sports.business.abstracts.CoachService;
+import com.ozalp.Velora.Sports.business.abstracts.UserService;
+import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutItemRequest;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.AthleteProgress;
+import com.ozalp.Velora.Sports.entities.concretes.Coach;
+import com.ozalp.Velora.Sports.entities.concretes.User;
 import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
 import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.Aspect;
@@ -19,9 +24,11 @@ import java.util.UUID;
 public class SecurityAspect {
 
     private final AthleteProgressService athleteProgressService;
+    private final UserService userService;
+    private final CoachService coachService;
 
     @Before("@annotation(CheckAthleteOwnership) && args(athleteId, athleteProgressId,..)")
-    public void checkOwnership(UUID athleteId, UUID athleteProgressId) {
+    public void checkAthleteOwnership(UUID athleteId, UUID athleteProgressId) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String securityEmail = authentication.getName();
 
@@ -39,4 +46,15 @@ public class SecurityAspect {
             throw new AuthorizationException(Messages.AthleteProgress.NOT_MATCHED);
         }
     }
+
+//    @Before("@annotation(CheckCoachOwnerShip) && args(request,..)")
+//    public void checkCoachOwnerShip(CreateWorkoutItemRequest request) {
+//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//        String securityEmail = authentication.getName();
+//        User authUser = userService.findByEmail(securityEmail);
+//        Coach coachUser = authUser.getCoach();
+//        if (coachUser == null) {
+//            return;
+//        }
+//    }
 }
