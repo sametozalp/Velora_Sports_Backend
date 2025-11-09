@@ -1,6 +1,7 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.aop.annotations.CheckAthleteOwnership;
+import com.ozalp.Velora.Sports.aop.annotations.Loggable;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;

@@ -35,14 +35,6 @@ public class SecurityAspect {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String securityEmail = authentication.getName();
 
-//        if (authentication.getAuthorities().stream()
-//                .anyMatch(auth ->
-//                        auth.getAuthority().equals(RoleEnum.ROLE_SUPER_ADMIN.toString()) ||
-//                                auth.getAuthority().equals(RoleEnum.ROLE_COACH.toString()) ||
-//                                auth.getAuthority().equals(RoleEnum.ROLE_SUPER_ADMIN.toString()))) {
-//            return;
-//        }
-
         AthleteProgress progress = athleteProgressService.findById(athleteProgressId);
 
         if (!securityEmail.equals(progress.getAthlete().getUser().getEmail())) {
