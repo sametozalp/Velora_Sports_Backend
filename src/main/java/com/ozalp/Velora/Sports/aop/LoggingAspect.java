@@ -33,10 +33,9 @@ public class LoggingAspect {
     }
 
     @Around("execution(* com.ozalp.Velora.Sports.business.concretes.*.*(..)) && " +
-            "!execution(* com.ozalp.Velora.Sports.business.concretes.*.get*(..)) && " +
-            "!execution(* com.ozalp.Velora.Sports.business.concretes.*.find*(..)) &&" +
-            "!execution(* com.ozalp.Velora.Sports.business.concretes.auth.*(..))")
-    public void logAllServiceMethods(ProceedingJoinPoint joinPoint) throws Throwable {
+            "!execution(* com.ozalp.Velora.Sports.business.concretes.AuthManager.*(..)) && " +
+            "!execution(* com.ozalp.Velora.Sports.business.concretes.*.find*(..))")
+    public Object logAllServiceMethods(ProceedingJoinPoint joinPoint) throws Throwable {
         long start = System.currentTimeMillis();
 
         Log log = new Log();
@@ -67,6 +66,7 @@ public class LoggingAspect {
             log.setExecutionTimeMs(duration);
             logRepository.save(log);
         }
+        return result;
     }
 
 }
