@@ -5,11 +5,9 @@ import com.ozalp.Velora.Sports.dataAcess.LogRepository;
 import com.ozalp.Velora.Sports.entities.concretes.Log;
 import com.ozalp.Velora.Sports.entities.enums.ExceptionLogStatus;
 import lombok.AllArgsConstructor;
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -25,12 +23,12 @@ public class LoggingAspect {
     private final LogRepository logRepository;
     private final UserService userService;
 
-    @Before("execution (* com.ozalp.Velora.Sports.business.concretes.*.*(..))")
-    public void logBefore(JoinPoint joinPoint) {
-        String methodName = joinPoint.getSignature().getName();
-        String className = joinPoint.getTarget().getClass().getSimpleName();
-        //System.out.println("called: " + className + "." + methodName);
-    }
+//    @Before("execution (* com.ozalp.Velora.Sports.business.concretes.*.*(..))")
+//    public void logBefore(JoinPoint joinPoint) {
+//        String methodName = joinPoint.getSignature().getName();
+//        String className = joinPoint.getTarget().getClass().getSimpleName();
+//        //System.out.println("called: " + className + "." + methodName);
+//    }
 
     @Around("execution(* com.ozalp.Velora.Sports.business.concretes.*.*(..)) && " +
             "!execution(* com.ozalp.Velora.Sports.business.concretes.AuthManager.*(..)) && " +
