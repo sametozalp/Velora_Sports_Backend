@@ -1,7 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.aop.annotations.CheckAthleteOwnership;
-import com.ozalp.Velora.Sports.aop.annotations.Loggable;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
@@ -17,6 +16,7 @@ import com.ozalp.Velora.Sports.entities.enums.AthleteProgressStatus;
 import com.ozalp.Velora.Sports.entities.enums.PointType;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -110,6 +110,7 @@ public class AthleteProgressManager implements AthleteProgressService {
         return (countCompletedTask / totalCount) * 100;
     }
 
+    @Cacheable(value = "lastMonthScores", key = "#organizationId")
     @Override
     public List<AthleteScoreSummaryResponse> getLastMonthScores(UUID organizationId) {
         LocalDateTime startDate = LocalDateTime.now().minusMonths(1);
