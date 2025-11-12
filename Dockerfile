@@ -4,16 +4,26 @@
 #COPY target/Velora-Sports-Backend-0.0.1-SNAPSHOT.jar Velora-Sports-Backend-0.0.1-SNAPSHOT.jar
 #ENTRYPOINT ["java", "-jar", "Velora-Sports-Backend-0.0.1-SNAPSHOT.jar"]
 
-# Build aşaması
-FROM maven:3.9.2-eclipse-temurin-21 AS build
+# 1️⃣ Build aşaması
+FROM maven:3.9.11-eclipse-temurin-21 AS build
 WORKDIR /app
+
+# pom.xml ve kaynak kodu kopyala
 COPY pom.xml .
 COPY src ./src
+
+# JAR dosyasını oluştur
 RUN mvn clean package -DskipTests
 
-# Run aşaması
+# 2️⃣ Runtime aşaması
 FROM eclipse-temurin:21-jdk
 WORKDIR /app
-COPY --from=build /app/target/Velora-Sports-Backend-0.0.1-SNAPSHOT.jar .
+
+# Build aşamasından jar'ı al
+COPY --from=build /app/target/*.jar app.jar
+
+# Uygulamanın dinlediği portu expose et
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "Velora-Sports-Backend-0.0.1-SNAPSHOT.jar"]
+
+# Uygulama başlat
+ENTRYPOINT ["java", "-jar", "app.jar"]
