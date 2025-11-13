@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.exc.InvalidFormatException;
 import com.ozalp.Velora.Sports.exceptions.errors.AuthorizationException;
 import com.ozalp.Velora.Sports.exceptions.errors.InvalidTokenException;
 import com.ozalp.Velora.Sports.exceptions.errors.NotMatchedException;
+import com.ozalp.Velora.Sports.exceptions.errors.UserOrganizationException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -21,6 +22,11 @@ import java.util.Map;
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    @ExceptionHandler(UserOrganizationException.class)
+    ResponseEntity<?> handle(UserOrganizationException e) {
+        return ResponseEntity.badRequest().body(Map.of("message", e.getLocalizedMessage()));
+    }
 
     @ExceptionHandler(AuthorizationException.class)
     ResponseEntity<?> handle(AuthorizationException e) {

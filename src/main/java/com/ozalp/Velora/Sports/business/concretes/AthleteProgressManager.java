@@ -56,7 +56,7 @@ public class AthleteProgressManager implements AthleteProgressService {
                 workoutItem.getId(),
                 AthleteProgressStatus.NOT_COMPLETED,
                 workoutItem.getPoint(),
-                workoutItem.getAthlete().getUser().getOrganization()
+                workoutItem.getAthlete().getUser().getOrganizations().getFirst().getOrganization()
         );
 
         return repository.save(athleteProgress);

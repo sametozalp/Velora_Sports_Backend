@@ -15,7 +15,7 @@ public abstract class BaseEntity {
     private UUID id;
 
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
@@ -29,13 +29,13 @@ public abstract class BaseEntity {
 
     @PrePersist
     private void onCreate() {
-        createAt = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 
     @PreUpdate
     private void onUpdate() {
-        createAt = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
         updatedAt = LocalDateTime.now();
     }
 }

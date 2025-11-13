@@ -2,6 +2,11 @@ package com.ozalp.Velora.Sports.common;
 
 public class Messages {
 
+    public static class UserOrganization {
+        public static final String NOT_FOUND = "User organization not found";
+        public static final String ALREADY_REMEMBER = "User is already member of organization";
+    }
+
     public static class AuthMessages {
 
         public static final String PASSWORDS_NOT_MATCHED = "Passwords not matched";

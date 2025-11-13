@@ -57,9 +57,12 @@ public class User extends BaseEntity implements UserDetails {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserRole> roles;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "organization_id")
-    private Organization organization;
+//    @ManyToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "organization_id")
+//    private Organization organization;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserOrganization> organizations;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Athlete athlete;
@@ -80,7 +83,7 @@ public class User extends BaseEntity implements UserDetails {
 
     public List<String> getAllRoles() {
         return getRoles().stream()
-                .map(r->r.getRole().getName().name())
+                .map(r -> r.getRole().getName().name())
                 .toList();
     }
 }
