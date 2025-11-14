@@ -5,7 +5,6 @@ import com.ozalp.Velora.Sports.business.abstracts.UserService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.requests.LoginRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.FullUserResponse;
-import com.ozalp.Velora.Sports.business.dtos.responses.RefreshTokenResponse;
 import com.ozalp.Velora.Sports.business.mappers.AthleteMapper;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.common.Messages;
@@ -41,17 +40,24 @@ public class AuthManager implements AuthService {
 
     @Transactional
     @Override
-    public RefreshTokenResponse refreshToken(String refreshToken) {
+    public FullUserResponse refreshToken(String refreshToken) {
         Pair<String, RefreshToken> pair = jwtService.refreshAccessToken(refreshToken);
         String accessToken = pair.a;
         RefreshToken newRefreshToken = pair.b;
         User user = pair.b.getUser();
 
-        RefreshTokenResponse response = new RefreshTokenResponse();
-        response.setAccessToken(accessToken);
-        response.setRefreshToken(newRefreshToken.getRefreshToken());
-        response.setUserId(user.getId());
-        return response;
+        return FullUserResponse.builder()
+                .refreshToken(newRefreshToken.getRefreshToken())
+                .accessToken(accessToken)
+                .user(userMapper.toResponse(user))
+                .athlete(athleteMapper.toResponse(user.getAthlete()))
+                .build();
+
+//        RefreshTokenResponse response = new RefreshTokenResponse();
+//        response.setAccessToken(accessToken);
+//        response.setRefreshToken(newRefreshToken.getRefreshToken());
+//        response.setUserId(user.getId());
+//        return response;
     }
 
     @Override

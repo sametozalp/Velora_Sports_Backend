@@ -6,7 +6,6 @@ import com.ozalp.Velora.Sports.business.concretes.AuthManager;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.requests.LoginRequest;
 import com.ozalp.Velora.Sports.business.dtos.responses.FullUserResponse;
-import com.ozalp.Velora.Sports.business.dtos.responses.RefreshTokenResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.common.security.JwtService;
