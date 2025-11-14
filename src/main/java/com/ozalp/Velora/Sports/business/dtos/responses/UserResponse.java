@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.dtos.responses;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,7 +8,8 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateUserResponse {
+@Builder
+public class UserResponse {
 
     private UUID id;
 
@@ -17,7 +19,4 @@ public class CreateUserResponse {
 
     private String email;
 
-    private String accessToken;
-
-    private String refreshToken;
 }

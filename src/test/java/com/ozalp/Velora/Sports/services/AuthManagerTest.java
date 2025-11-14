@@ -5,7 +5,7 @@ import com.ozalp.Velora.Sports.business.abstracts.UserService;
 import com.ozalp.Velora.Sports.business.concretes.AuthManager;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
 import com.ozalp.Velora.Sports.business.dtos.requests.LoginRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.FullUserResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.RefreshTokenResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.common.Messages;
@@ -69,7 +69,7 @@ public class AuthManagerTest {
     @Test
     public void register() {
         CreateUserRequest request = new CreateUserRequest();
-        CreateUserResponse response = new CreateUserResponse();
+        FullUserResponse response = new FullUserResponse();
         UUID uuid = UUID.randomUUID();
         response.setId(uuid);
 
@@ -78,7 +78,7 @@ public class AuthManagerTest {
         when(jwtService.generateAccessToken(mockUser)).thenReturn("access123");
         when(jwtService.generateRefreshToken(mockUser)).thenReturn(mockRefreshToken);
 
-        CreateUserResponse result = authManager.register(request);
+        FullUserResponse result = authManager.register(request);
 
         assertEquals(uuid, result.getId());
         assertEquals("access123", result.getAccessToken());
@@ -97,7 +97,7 @@ public class AuthManagerTest {
 
         UUID uuid = UUID.randomUUID();
 
-        CreateUserResponse response = new CreateUserResponse();
+        FullUserResponse response = new FullUserResponse();
         response.setId(uuid);
 
         when(userService.findByEmail("test@example.com")).thenReturn(mockUser);
@@ -106,7 +106,7 @@ public class AuthManagerTest {
         when(jwtService.generateAccessToken(mockUser)).thenReturn("access123");
         when(jwtService.generateRefreshToken(mockUser)).thenReturn(mockRefreshToken);
 
-        CreateUserResponse result = authManager.login(request);
+        FullUserResponse result = authManager.login(request);
 
         assertEquals(uuid, result.getId());
         assertEquals("access123", result.getAccessToken());

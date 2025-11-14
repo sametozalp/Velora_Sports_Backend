@@ -3,7 +3,7 @@ package com.ozalp.Velora.Sports.business.concretes;
 import com.ozalp.Velora.Sports.business.abstracts.RoleService;
 import com.ozalp.Velora.Sports.business.abstracts.UserService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateUserRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateUserResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.FullUserResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.UserRepository;
@@ -50,7 +50,7 @@ public class UserManager implements UserService {
 
     @Transactional
     @Override
-    public CreateUserResponse create(CreateUserRequest request) {
+    public FullUserResponse create(CreateUserRequest request) {
         User user = mapper.toEntity(request);
         user.setUserStatus(UserStatus.ACTIVE);
         user.setPassword(passwordEncoder.encode(request.getPassword()));
@@ -68,7 +68,10 @@ public class UserManager implements UserService {
         user.setRoles(new HashSet<>(List.of(userRole)));
         user.setAthlete(athlete);
         User saved = repository.save(user);
-        return mapper.toResponse(findById(saved.getId()));
+        //return mapper.toResponse(findById(saved.getId()));
+        return FullUserResponse.builder()
+                .user(mapper.toResponse(findById(saved.getId())))
+                .build();
     }
 
     @Override

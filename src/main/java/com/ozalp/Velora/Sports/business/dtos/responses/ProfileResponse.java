@@ -7,7 +7,7 @@ import lombok.Setter;
 @Setter
 public class ProfileResponse {
 
-    private CreateUserResponse user;
+    private UserResponse user;
 
     private int totalPoint;
 

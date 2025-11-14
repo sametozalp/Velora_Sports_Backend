@@ -9,7 +9,7 @@ import java.util.List;
 @Setter
 public class HomeFeedResponse {
 
-    private CreateUserResponse user;
+    private UserResponse user;
 
     private List<CreateWorkoutItemResponse> workoutItems;
 
