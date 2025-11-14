@@ -6,6 +6,7 @@ import com.ozalp.Velora.Sports.entities.enums.UserOrganizationStatus;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.UUID;
@@ -18,11 +19,13 @@ public class UserOrganizationController {
     private final UserOrganizationService userOrganizationService;
 
     @PostMapping("/create")
+    @PreAuthorize("hasRole('ATHLETE')")
     ResponseEntity<?> create(@Valid @RequestBody CreateUserOrganizationRequest request) {
         return ResponseEntity.ok(userOrganizationService.create(request));
     }
 
     @PostMapping("/setStatus/{userOrganizationId}/{status}")
+    @PreAuthorize("hasRole('ROLE_ORG_ADMIN') or hasRole('ROLE_ORG_SUB_ADMIN')")
     ResponseEntity<?> setStatus(@PathVariable("userOrganizationId") UUID userOrganizationId, @PathVariable("status") UserOrganizationStatus status) {
         return ResponseEntity.ok(userOrganizationService.setStatus(userOrganizationId, status));
     }

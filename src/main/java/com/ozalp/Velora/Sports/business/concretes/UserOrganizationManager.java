@@ -1,5 +1,6 @@
 package com.ozalp.Velora.Sports.business.concretes;
 
+import com.ozalp.Velora.Sports.aop.annotations.CheckOrganizationOwnership;
 import com.ozalp.Velora.Sports.business.abstracts.OrganizationService;
 import com.ozalp.Velora.Sports.business.abstracts.UserOrganizationService;
 import com.ozalp.Velora.Sports.business.abstracts.UserService;
@@ -66,6 +67,7 @@ public class UserOrganizationManager implements UserOrganizationService {
     }
 
     @Override
+    @CheckOrganizationOwnership
     public UserOrganizationResponse setStatus(UUID userOrganizationId, UserOrganizationStatus status) {
         UserOrganization userOrganization = findById(userOrganizationId);
         userOrganization.setStatus(status);
@@ -83,5 +85,16 @@ public class UserOrganizationManager implements UserOrganizationService {
         }
 
         return mapper.toResponse(userOrganization);
+    }
+
+    @Override
+    public UserOrganization getAssociateOrganizationOfUser(User organizationUser, UserOrganizationStatus userOrganizationStatus) {
+        List<UserOrganization> list = repository.findByUserAndStatusAndDeletedAtNotNull(organizationUser, userOrganizationStatus);
+        if (list.size() > 1)
+            throw new UserOrganizationException(Messages.UserOrganization.ASSOCIATE_MANY_ORGANIZATION);
+        else if (!list.isEmpty())
+            return list.getFirst();
+        else
+            throw new UserOrganizationException(Messages.UserOrganization.NOT_FOUND);
     }
 }

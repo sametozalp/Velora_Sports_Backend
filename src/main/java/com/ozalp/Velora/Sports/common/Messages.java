@@ -5,6 +5,8 @@ public class Messages {
     public static class UserOrganization {
         public static final String NOT_FOUND = "User organization not found";
         public static final String ALREADY_REMEMBER = "User is already member of organization";
+        public static final String NOT_MATCHED = "User and organization not matched";
+        public static final String ASSOCIATE_MANY_ORGANIZATION = "user is associate to many organization";
     }
 
     public static class AuthMessages {
