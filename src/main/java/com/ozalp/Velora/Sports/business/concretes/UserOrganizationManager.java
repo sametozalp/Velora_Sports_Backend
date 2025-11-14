@@ -31,7 +31,7 @@ public class UserOrganizationManager implements UserOrganizationService {
 
     @Override
     public UserOrganization create(UserOrganization userOrganization) {
-        List<UserOrganization> dbList = repository.findByUserAndDeletedAtIsNull(userOrganization.getUser());
+        List<UserOrganization> dbList = repository.findByUserAndStatus(userOrganization.getUser(), UserOrganizationStatus.ACCEPTED);
         if (!dbList.isEmpty())
             throw new UserOrganizationException(Messages.UserOrganization.ALREADY_REMEMBER);
         return repository.save(userOrganization);
@@ -45,7 +45,7 @@ public class UserOrganizationManager implements UserOrganizationService {
 
     @Override
     public UserOrganization save(UserOrganization userOrganization) {
-        List<UserOrganization> dbList = repository.findByUserAndDeletedAtIsNull(userOrganization.getUser());
+        List<UserOrganization> dbList = repository.findByUserAndStatus(userOrganization.getUser(), UserOrganizationStatus.ACCEPTED);
         if (!dbList.isEmpty())
             throw new UserOrganizationException(Messages.UserOrganization.ALREADY_REMEMBER);
         return repository.save(userOrganization);
@@ -55,7 +55,7 @@ public class UserOrganizationManager implements UserOrganizationService {
     public UserOrganizationResponse create(CreateUserOrganizationRequest request) {
         User user = userService.findById(request.getUserId());
 
-        List<UserOrganization> dbList = repository.findByUserAndDeletedAtIsNull(user);
+        List<UserOrganization> dbList = repository.findByUserAndStatus(user, UserOrganizationStatus.ACCEPTED);
         if (!dbList.isEmpty())
             throw new UserOrganizationException(Messages.UserOrganization.ALREADY_REMEMBER);
 
