@@ -64,4 +64,24 @@ public class UserOrganizationManager implements UserOrganizationService {
                 new UserOrganization(user, organization, UserOrganizationStatus.WAITING);
         return mapper.toResponse(repository.save(userOrganization));
     }
+
+    @Override
+    public UserOrganizationResponse setStatus(UUID userOrganizationId, UserOrganizationStatus status) {
+        UserOrganization userOrganization = findById(userOrganizationId);
+        userOrganization.setStatus(status);
+        repository.save(userOrganization);
+
+        if (status == UserOrganizationStatus.ACCEPTED) {
+            List<UserOrganization> userOrganizationList = repository.findByUserAndStatusIsNot(userOrganization.getUser(), UserOrganizationStatus.ACCEPTED);
+            userOrganizationList.stream().forEach(userOrganizationRef -> {
+                userOrganizationRef.markAsDeleted();
+                repository.save(userOrganizationRef);
+            });
+        } else if (status == UserOrganizationStatus.REFUSED) {
+            userOrganization.markAsDeleted();
+            repository.save(userOrganization);
+        }
+
+        return mapper.toResponse(userOrganization);
+    }
 }

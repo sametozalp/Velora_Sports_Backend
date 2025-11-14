@@ -12,4 +12,6 @@ import java.util.UUID;
 @Repository
 public interface UserOrganizationRepository extends JpaRepository<UserOrganization, UUID> {
     List<UserOrganization> findByUserAndStatus(User user, UserOrganizationStatus status);
+
+    List<UserOrganization> findByUserAndStatusIsNot(User user, UserOrganizationStatus userOrganizationStatus);
 }
