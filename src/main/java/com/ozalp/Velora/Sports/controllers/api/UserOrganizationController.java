@@ -25,7 +25,7 @@ public class UserOrganizationController {
     }
 
     @PostMapping("/setStatus/{userOrganizationId}/{status}")
-    @PreAuthorize("hasRole('ROLE_ORG_ADMIN') or hasRole('ROLE_ORG_SUB_ADMIN')")
+    @PreAuthorize("hasRole('ORG_ADMIN') or hasRole('ORG_SUB_ADMIN')")
     ResponseEntity<?> setStatus(@PathVariable("userOrganizationId") UUID userOrganizationId, @PathVariable("status") UserOrganizationStatus status) {
         return ResponseEntity.ok(userOrganizationService.setStatus(userOrganizationId, status));
     }

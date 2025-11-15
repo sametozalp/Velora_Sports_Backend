@@ -22,8 +22,8 @@ public class Organization extends BaseEntity {
     @Column(name = "logo_url")
     private String logoUrl;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "organization_status", nullable = false)
-//    private OrganizationStatus organizationStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private OrganizationStatus status;
 
 }

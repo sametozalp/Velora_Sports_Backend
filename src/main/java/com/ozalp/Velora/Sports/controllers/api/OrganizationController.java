@@ -6,10 +6,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/organization")
@@ -22,5 +19,11 @@ public class OrganizationController {
     @PostMapping("/create")
     ResponseEntity<?> create(@Valid @RequestBody CreateOrganizationRequest request) {
         return ResponseEntity.ok(organizationService.create(request));
+    }
+
+    @PreAuthorize("hasRole('ATHLETE') or hasRole('SUPER_ADMIN')")
+    @GetMapping("/getActiveOrganizations")
+    ResponseEntity<?> getActiveOrganizations() {
+        return ResponseEntity.ok(organizationService.getActiveOrganizations());
     }
 }
