@@ -8,16 +8,12 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateWorkoutProgramResponse {
+public class MembershipResponse {
 
     private UUID id;
 
-    private String title;
+    private LocalDateTime joined_at;
 
-    private String description;
-
-    private LocalDateTime startDate;
-
-    private LocalDateTime endDate;
+    private LocalDateTime left_at;
 
 }

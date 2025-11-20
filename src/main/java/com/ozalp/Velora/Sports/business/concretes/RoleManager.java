@@ -2,7 +2,7 @@ package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.business.abstracts.RoleService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateRoleRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateRoleResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.RoleResponse;
 import com.ozalp.Velora.Sports.business.mappers.RoleMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.RoleRepository;
@@ -38,12 +38,12 @@ public class RoleManager implements RoleService {
     }
 
     @Override
-    public CreateRoleResponse create(CreateRoleRequest request) {
+    public RoleResponse create(CreateRoleRequest request) {
         return mapper.toResponse(mapper.toEntity(request));
     }
 
     @Override
-    public CreateRoleResponse create(RoleEnum request) {
+    public RoleResponse create(RoleEnum request) {
         Role role = new Role(request);
         return mapper.toResponse(repository.save(role));
     }

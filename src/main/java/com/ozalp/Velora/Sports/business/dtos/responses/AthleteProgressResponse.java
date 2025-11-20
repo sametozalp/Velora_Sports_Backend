@@ -7,16 +7,10 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateWorkoutItemResponse {
+public class AthleteProgressResponse {
 
     private UUID id;
 
-    private String notes;
-
-    private int sets;
-
-    private int reps;
-
-    private int restSeconds;
+    private int point;
 
 }

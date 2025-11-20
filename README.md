@@ -76,7 +76,7 @@ Local development defaults are defined in `src/main/resources/application-local.
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/<your-username>/Velora_Sports_Backend.git
+git clone https://github.com/sametozalp/Velora_Sports_Backend.git
 cd Velora_Sports_Backend
 ```
 

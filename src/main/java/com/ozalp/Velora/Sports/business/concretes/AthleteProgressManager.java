@@ -5,7 +5,7 @@ import com.ozalp.Velora.Sports.business.abstracts.AthleteProgressService;
 import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummary;
 import com.ozalp.Velora.Sports.business.dtos.responses.AthleteScoreSummaryResponse;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateAthleteProgressResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.AthleteProgressResponse;
 import com.ozalp.Velora.Sports.business.dtos.responses.DailyAthleteScore;
 import com.ozalp.Velora.Sports.business.mappers.AthleteProgressMapper;
 import com.ozalp.Velora.Sports.common.Messages;
@@ -64,7 +64,7 @@ public class AthleteProgressManager implements AthleteProgressService {
 
     @Override
     @CheckAthleteOwnership
-    public CreateAthleteProgressResponse setStatus(UUID athleteId, UUID athleteProgressId, AthleteProgressStatus athleteProgressStatus) {
+    public AthleteProgressResponse setStatus(UUID athleteId, UUID athleteProgressId, AthleteProgressStatus athleteProgressStatus) {
         AthleteProgress athleteProgress = findById(athleteProgressId);
         athleteProgress.setAthleteProgressStatus(athleteProgressStatus);
         if (athleteProgressStatus == AthleteProgressStatus.COMPLETED) {
@@ -76,7 +76,7 @@ public class AthleteProgressManager implements AthleteProgressService {
     }
 
     @Override
-    public List<CreateAthleteProgressResponse> findByAthleteId(UUID athleteId) {
+    public List<AthleteProgressResponse> findByAthleteId(UUID athleteId) {
         return repository.findByAthleteId(athleteId)
                 .stream()
                 .map(mapper::toResponse)

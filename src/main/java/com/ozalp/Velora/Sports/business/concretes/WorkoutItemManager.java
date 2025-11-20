@@ -6,7 +6,7 @@ import com.ozalp.Velora.Sports.business.abstracts.ExerciseService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutItemService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutProgramService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutItemRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateWorkoutItemResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.WorkoutItemResponse;
 import com.ozalp.Velora.Sports.business.mappers.WorkoutItemMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.WorkoutItemRepository;
@@ -49,7 +49,7 @@ public class WorkoutItemManager implements WorkoutItemService {
     @Transactional
     @Override
     @CheckCoachOwnerShip
-    public CreateWorkoutItemResponse create(CreateWorkoutItemRequest request) {
+    public WorkoutItemResponse create(CreateWorkoutItemRequest request) {
         WorkoutItem workoutItem = mapper.toEntity(request);
         workoutItem.setExercise(exerciseService.findById(request.getExerciseId()));
         workoutItem.setWorkoutProgram(workoutProgramService.findById(request.getWorkoutProgramId()));
@@ -60,7 +60,7 @@ public class WorkoutItemManager implements WorkoutItemService {
     }
 
     @Override
-    public List<CreateWorkoutItemResponse> findByAllInToday(UUID athleteId, LocalDate date) {
+    public List<WorkoutItemResponse> findByAllInToday(UUID athleteId, LocalDate date) {
         return repository.findByAthleteIdAndDate(athleteId, date)
                 .stream()
                 .map(mapper::toResponse)

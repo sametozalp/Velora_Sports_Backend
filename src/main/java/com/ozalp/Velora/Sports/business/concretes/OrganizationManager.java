@@ -2,7 +2,7 @@ package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.business.abstracts.OrganizationService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateOrganizationRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateOrganizationResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.OrganizationResponse;
 import com.ozalp.Velora.Sports.business.mappers.OrganizationMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.OrganizationRepository;
@@ -41,14 +41,14 @@ public class OrganizationManager implements OrganizationService {
     }
 
     @Override
-    public CreateOrganizationResponse create(CreateOrganizationRequest request) {
+    public OrganizationResponse create(CreateOrganizationRequest request) {
         Organization organization = mapper.toEntity(request);
         organization.setStatus(OrganizationStatus.ACTIVE);
         return mapper.toResponse(repository.save(organization));
     }
 
     @Override
-    public List<CreateOrganizationResponse> getActiveOrganizations() {
+    public List<OrganizationResponse> getActiveOrganizations() {
         return repository.findByStatus(OrganizationStatus.ACTIVE)
                 .stream().map(mapper::toResponse)
                 .toList();

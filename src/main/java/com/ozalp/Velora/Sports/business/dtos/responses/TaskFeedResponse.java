@@ -9,6 +9,6 @@ import java.util.List;
 @Setter
 public class TaskFeedResponse {
 
-    private List<CreateWorkoutItemResponse> workoutItems;
+    private List<WorkoutItemResponse> workoutItems;
 
 }

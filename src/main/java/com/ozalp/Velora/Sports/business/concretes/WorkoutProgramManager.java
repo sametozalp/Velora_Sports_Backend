@@ -5,7 +5,7 @@ import com.ozalp.Velora.Sports.business.abstracts.AthleteService;
 import com.ozalp.Velora.Sports.business.abstracts.CoachService;
 import com.ozalp.Velora.Sports.business.abstracts.WorkoutProgramService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateWorkoutProgramRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateWorkoutProgramResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.WorkoutProgramResponse;
 import com.ozalp.Velora.Sports.business.mappers.WorkoutProgramMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.dataAcess.WorkoutProgramRepository;
@@ -43,7 +43,7 @@ public class WorkoutProgramManager implements WorkoutProgramService {
 
     @Override
     @CheckCoachOwnerShip
-    public CreateWorkoutProgramResponse create(CreateWorkoutProgramRequest request) {
+    public WorkoutProgramResponse create(CreateWorkoutProgramRequest request) {
         WorkoutProgram workoutProgram = mapper.toEntity(request);
         workoutProgram.setCoach(coachService.findById(request.getCoachId()));
         workoutProgram.setAthlete(athleteService.findById(request.getAthleteId()));

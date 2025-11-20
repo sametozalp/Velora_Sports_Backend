@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
-public class CreateExerciseResponse {
+public class ExerciseResponse {
 
     private UUID id;
 

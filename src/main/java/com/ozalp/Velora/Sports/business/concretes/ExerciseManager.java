@@ -2,7 +2,7 @@ package com.ozalp.Velora.Sports.business.concretes;
 
 import com.ozalp.Velora.Sports.business.abstracts.ExerciseService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateExerciseRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateExerciseResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.ExerciseResponse;
 import com.ozalp.Velora.Sports.business.mappers.ExerciseMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Exercise;
@@ -37,7 +37,7 @@ public class ExerciseManager implements ExerciseService {
     }
 
     @Override
-    public CreateExerciseResponse create(CreateExerciseRequest request) {
+    public ExerciseResponse create(CreateExerciseRequest request) {
         Exercise exercise = mapper.toEntity(request);
         return mapper.toResponse(repository.save(exercise));
     }

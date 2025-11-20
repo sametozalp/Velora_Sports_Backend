@@ -11,7 +11,7 @@ public class HomeFeedResponse {
 
     private UserResponse user;
 
-    private List<CreateWorkoutItemResponse> workoutItems;
+    private List<WorkoutItemResponse> workoutItems;
 
     private int totalPoint;
 

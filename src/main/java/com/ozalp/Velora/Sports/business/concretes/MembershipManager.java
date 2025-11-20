@@ -4,7 +4,7 @@ import com.ozalp.Velora.Sports.business.abstracts.MembershipService;
 import com.ozalp.Velora.Sports.business.abstracts.OrganizationService;
 import com.ozalp.Velora.Sports.business.abstracts.UserService;
 import com.ozalp.Velora.Sports.business.dtos.requests.CreateMembershipRequest;
-import com.ozalp.Velora.Sports.business.dtos.responses.CreateMembershipResponse;
+import com.ozalp.Velora.Sports.business.dtos.responses.MembershipResponse;
 import com.ozalp.Velora.Sports.business.mappers.MembershipMapper;
 import com.ozalp.Velora.Sports.common.Messages;
 import com.ozalp.Velora.Sports.entities.concretes.Membership;
@@ -42,7 +42,7 @@ public class MembershipManager implements MembershipService {
     }
 
     @Override
-    public CreateMembershipResponse create(CreateMembershipRequest request) {
+    public MembershipResponse create(CreateMembershipRequest request) {
         Membership membership = mapper.toEntity(request);
         membership.setMembershipStatus(MembershipStatus.ACTIVE);
         membership.setOrganization(organizationService.findById(UUID.fromString(request.getOrganizationId())));
