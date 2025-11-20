@@ -10,6 +10,7 @@ import com.ozalp.Velora.Sports.entities.concretes.Organization;
 import com.ozalp.Velora.Sports.entities.enums.OrganizationStatus;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -47,6 +48,7 @@ public class OrganizationManager implements OrganizationService {
         return mapper.toResponse(repository.save(organization));
     }
 
+    @Cacheable(value = "activeOrganizations")
     @Override
     public List<OrganizationResponse> getActiveOrganizations() {
         return repository.findByStatus(OrganizationStatus.ACTIVE)

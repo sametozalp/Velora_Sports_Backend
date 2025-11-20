@@ -11,6 +11,7 @@ import com.ozalp.Velora.Sports.business.dtos.responses.TaskFeedResponse;
 import com.ozalp.Velora.Sports.business.mappers.UserMapper;
 import com.ozalp.Velora.Sports.entities.concretes.Athlete;
 import lombok.AllArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,6 +26,7 @@ public class FeedManager implements FeedService {
     private final UserMapper userMapper;
     private final WorkoutItemService workoutItemService;
 
+    @Cacheable(value = "homeFeed", key = "#athleteId")
     @Override
     public HomeFeedResponse getHomeFeed(UUID athleteId) {
         Athlete athlete = athleteService.findById(athleteId);
@@ -37,6 +39,7 @@ public class FeedManager implements FeedService {
     }
 
     @Override
+    @Cacheable(value = "taskFeed", key = "#athleteId")
     public TaskFeedResponse getTaskFeed(UUID athleteId) {
         TaskFeedResponse response = new TaskFeedResponse();
         response.setWorkoutItems(workoutItemService.findByAllInToday(athleteId, LocalDate.now()));
@@ -44,6 +47,7 @@ public class FeedManager implements FeedService {
     }
 
     @Override
+    @Cacheable(value = "profileFeed", key = "#athleteId")
     public ProfileResponse getProfileFeed(UUID athleteId) {
         ProfileResponse response = new ProfileResponse();
         response.setUser(userMapper.toResponse(athleteService.findById(athleteId).getUser()));
@@ -53,6 +57,7 @@ public class FeedManager implements FeedService {
     }
 
     @Override
+    @Cacheable(value = "staticFeed", key = "#athleteId")
     public StaticsFeedResponse getStaticsFeed(UUID athleteId, UUID organizationId) {
         return new StaticsFeedResponse(
                 athleteProgressService.getDailyAthleteScoreDetails(athleteId),
